@@ -3,6 +3,7 @@ import { Outfit, DM_Sans } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import GradientBackground from "@/components/GradientBackground";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -81,6 +82,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} ${dmSans.variable}`}>
       <body className="min-h-screen relative overflow-x-hidden">
+        <GradientBackground />
+
         {/* Animated background blobs */}
         <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
           <div

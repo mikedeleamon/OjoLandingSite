@@ -11,10 +11,11 @@
 
 html {
   scroll-behavior: smooth;
+  /* SSR / no-JS fallback — matches gradient index 0 */
+  background: var(--gradient-main);
 }
 
 body {
-  background: var(--gradient-main);
   min-height: 100vh;
   font-family: var(--font-dm-sans), sans-serif;
   -webkit-font-smoothing: antialiased;

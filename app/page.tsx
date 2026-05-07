@@ -1,0 +1,344 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Link from "next/link";
+import {
+  Cloud,
+  Shirt,
+  Layers,
+  History,
+  FolderOpen,
+  Sparkles,
+  ChevronRight,
+  Mail,
+  ShieldCheck,
+  FileText,
+  Trash2,
+  HeadphonesIcon,
+} from "lucide-react";
+import { SUPPORT_EMAIL, APP_STORE_URL } from "@/lib/constants";
+
+const features = [
+  {
+    icon: Sparkles,
+    title: "Smart outfit suggestions",
+    description:
+      "OJO analyzes today's forecast — temperature, feels-like, humidity, wind — and recommends a complete outfit from your actual closet.",
+  },
+  {
+    icon: Cloud,
+    title: "Live weather integration",
+    description:
+      "Powered by AccuWeather's real-time data. OJO knows when the morning is cold but the afternoon warms up, and layers accordingly.",
+  },
+  {
+    icon: Shirt,
+    title: "Your closet, organized",
+    description:
+      "Add clothing articles with type, color, and fabric. OJO learns what you own so it can recommend what you actually have.",
+  },
+  {
+    icon: Layers,
+    title: "Layering intelligence",
+    description:
+      "On days with big temperature swings, OJO flags exactly which layers you can shed mid-day — with confidence scores and timing.",
+  },
+  {
+    icon: FolderOpen,
+    title: "Multiple closets",
+    description:
+      "Seasonal wardrobes, travel packing, work vs. weekend — keep them separated and switch your preferred closet anytime.",
+  },
+  {
+    icon: History,
+    title: "Outfit history",
+    description:
+      "Track what you've worn and when. OJO uses your history to avoid repeating outfits and surface fresh combinations.",
+  },
+];
+
+const legalLinks = [
+  { icon: ShieldCheck, label: "Privacy Policy", href: "/privacy", desc: "How we handle your data" },
+  { icon: FileText, label: "Terms of Service", href: "/terms", desc: "Rules of the road" },
+  { icon: Trash2, label: "Delete Account", href: "/delete-account", desc: "Remove your data anytime" },
+  { icon: HeadphonesIcon, label: "Support", href: "/support", desc: "Get help fast" },
+];
+
+// Animation variants
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+};
+
+export default function HomePage() {
+  return (
+    <div className="min-h-screen">
+      {/* ── HERO ── */}
+      <section className="relative pt-36 pb-24 px-6 overflow-hidden">
+        <div className="max-w-4xl mx-auto text-center">
+          {/* App icon / logo */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="flex justify-center mb-8"
+          >
+            {/* Replace this div with <Image src="/icon.png" ... /> once you have the asset */}
+            <div className="w-24 h-24 rounded-[28px] glass-strong shadow-xl flex items-center justify-center animate-float">
+              <span className="font-outfit font-extrabold text-white text-4xl leading-none tracking-tighter">
+                O
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="font-outfit font-extrabold text-5xl md:text-7xl text-white text-shadow leading-[1.05] mb-6"
+          >
+            Dress for
+            <br />
+            the weather.
+          </motion.h1>
+
+          {/* Subheadline */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="text-white/75 text-lg md:text-xl leading-relaxed max-w-xl mx-auto mb-10 font-dm"
+          >
+            OJO reads the forecast, knows your wardrobe, and tells you exactly
+            what to wear — every single day.
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-3"
+          >
+            <a
+              href={APP_STORE_URL}
+              className="group flex items-center gap-2 bg-white text-teal-600 font-outfit font-semibold text-sm px-6 py-3.5 rounded-full shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-200"
+            >
+              <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current" aria-hidden>
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+              </svg>
+              Coming Soon on App Store
+            </a>
+
+            <Link
+              href="/support"
+              className="flex items-center gap-2 glass text-white font-outfit font-medium text-sm px-6 py-3.5 rounded-full hover:glass-strong hover:scale-105 transition-all duration-200"
+            >
+              <Mail size={15} />
+              Contact Support
+            </Link>
+          </motion.div>
+
+          {/* App preview placeholder */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-20 flex justify-center"
+          >
+            <div className="relative">
+              {/* Phone frame */}
+              <div
+                className="w-64 md:w-72 h-[520px] md:h-[580px] rounded-[44px] glass-strong shadow-2xl border-[3px] border-white/30 flex flex-col items-center justify-center gap-4 overflow-hidden"
+                role="img"
+                aria-label="OJO app preview"
+              >
+                {/* Status bar */}
+                <div className="absolute top-0 left-0 right-0 h-10 flex items-center justify-center">
+                  <div className="w-20 h-5 rounded-full glass border border-white/20" />
+                </div>
+
+                {/* Simulated app content */}
+                <div className="flex flex-col items-center gap-3 px-6 mt-8">
+                  <div className="glass rounded-2xl px-5 py-3 text-center">
+                    <p className="text-white/50 text-xs font-outfit mb-0.5">New York, NY</p>
+                    <p className="text-white font-outfit font-bold text-3xl">62°F</p>
+                    <p className="text-white/60 text-xs font-outfit">Partly Cloudy</p>
+                  </div>
+                  <div className="text-white/40 text-xs font-outfit">Today's outfit</div>
+                  <div className="w-full glass rounded-2xl p-4 flex flex-col gap-2.5">
+                    {["Light wash jeans", "White linen shirt", "Sage bomber jacket"].map((item) => (
+                      <div key={item} className="flex items-center gap-2.5">
+                        <div className="w-7 h-7 rounded-lg glass border border-white/20 flex items-center justify-center">
+                          <Shirt size={12} className="text-white/60" />
+                        </div>
+                        <span className="text-white/80 text-xs font-dm">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="glass rounded-xl px-4 py-2 w-full text-center">
+                    <p className="text-white/60 text-xs font-outfit">
+                      🌡 Layer tip: you can ditch the jacket after 2pm
+                    </p>
+                  </div>
+                </div>
+
+                {/* Home indicator */}
+                <div className="absolute bottom-3 w-28 h-1 rounded-full bg-white/30" />
+              </div>
+
+              {/* Decorative glow behind phone */}
+              <div
+                className="absolute inset-0 -z-10 blur-3xl opacity-40 rounded-full scale-110"
+                style={{ background: "radial-gradient(ellipse, rgba(255,255,255,0.5) 0%, transparent 70%)" }}
+              />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── FEATURES ── */}
+      <section className="px-6 py-20" aria-labelledby="features-heading">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="text-center mb-14"
+          >
+            <p className="text-white/55 text-xs font-semibold uppercase tracking-widest font-outfit mb-3">
+              What OJO does
+            </p>
+            <h2
+              id="features-heading"
+              className="font-outfit font-bold text-3xl md:text-4xl text-white text-shadow"
+            >
+              Your wardrobe, weather-aware.
+            </h2>
+          </motion.div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          >
+            {features.map((feature) => {
+              const Icon = feature.icon;
+              return (
+                <motion.div
+                  key={feature.title}
+                  variants={itemVariants}
+                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                  className="glass rounded-3xl p-6 cursor-default group"
+                >
+                  <div className="w-10 h-10 rounded-2xl glass-strong flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+                    <Icon size={18} className="text-white" strokeWidth={1.8} />
+                  </div>
+                  <h3 className="font-outfit font-semibold text-white text-base mb-2">
+                    {feature.title}
+                  </h3>
+                  <p className="text-white/65 text-sm leading-relaxed font-dm">
+                    {feature.description}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── LEGAL / SUPPORT LINKS ── */}
+      <section className="px-6 py-16" aria-labelledby="legal-heading">
+        <div className="max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="text-center mb-10"
+          >
+            <h2
+              id="legal-heading"
+              className="font-outfit font-bold text-2xl md:text-3xl text-white text-shadow mb-2"
+            >
+              Transparency & support
+            </h2>
+            <p className="text-white/60 text-sm font-dm">
+              Everything you need to know about your data and how to get help.
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-40px" }}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+          >
+            {legalLinks.map((link) => {
+              const Icon = link.icon;
+              return (
+                <motion.div key={link.href} variants={itemVariants}>
+                  <Link
+                    href={link.href}
+                    className="group flex items-center gap-4 glass rounded-2xl px-5 py-4 hover:glass-strong transition-all duration-200 hover:scale-[1.02]"
+                  >
+                    <div className="w-9 h-9 rounded-xl glass-strong flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-200">
+                      <Icon size={16} className="text-white" strokeWidth={1.8} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-outfit font-semibold text-white text-sm">{link.label}</p>
+                      <p className="text-white/55 text-xs font-dm">{link.desc}</p>
+                    </div>
+                    <ChevronRight
+                      size={16}
+                      className="text-white/40 group-hover:text-white/70 group-hover:translate-x-0.5 transition-all duration-200 flex-shrink-0"
+                    />
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── CONTACT CTA ── */}
+      <section className="px-6 pb-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-2xl mx-auto glass-strong rounded-3xl p-8 md:p-10 text-center"
+        >
+          <p className="text-white/50 text-xs font-semibold uppercase tracking-widest font-outfit mb-3">
+            Questions?
+          </p>
+          <h2 className="font-outfit font-bold text-2xl text-white mb-3">
+            We'd love to hear from you.
+          </h2>
+          <p className="text-white/65 text-sm font-dm mb-6 leading-relaxed">
+            Reach out with feedback, bug reports, or anything on your mind. We
+            respond within 48 hours.
+          </p>
+          <a
+            href={`mailto:${SUPPORT_EMAIL}`}
+            className="inline-flex items-center gap-2 bg-white text-teal-600 font-outfit font-semibold text-sm px-6 py-3.5 rounded-full shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-200"
+          >
+            <Mail size={15} />
+            {SUPPORT_EMAIL}
+          </a>
+        </motion.div>
+      </section>
+    </div>
+  );
+}

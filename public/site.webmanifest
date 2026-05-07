@@ -4,8 +4,8 @@
   "description": "Dress for the weather.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#5EEAD4",
-  "theme_color": "#5EEAD4",
+  "background_color": "#2DD4BF",
+  "theme_color": "#2DD4BF",
   "icons": [
     {
       "src": "/ojo_app_icon@1x.png",

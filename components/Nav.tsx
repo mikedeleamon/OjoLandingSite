@@ -39,7 +39,7 @@ export default function Nav() {
                     aria-label='OJO Home'
                 >
                     <Image
-                        src='/ojoLogo.png'
+                        src='/Ojo_word_logo_White.png'
                         alt='OJO'
                         width={40}
                         height={40}

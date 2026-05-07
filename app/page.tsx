@@ -205,15 +205,18 @@ export default function HomePage() {
                                 alt='OJO app preview'
                                 width={320}
                                 height={640}
-                                className='w-64 md:w-80 h-auto shadow-2xl'
+                                className='w-64 md:w-80 h-auto rounded-[44px] '
+                                style={{
+                                    backgroundClip: 'padding-box',
+                                }}
                             />
 
                             {/* Decorative glow behind phone */}
                             <div
-                                className='absolute inset-0 -z-10 blur-3xl opacity-40 rounded-full scale-110'
+                                className='absolute inset-0 -z-10 blur-3xl opacity-50 rounded-full scale-125'
                                 style={{
                                     background:
-                                        'radial-gradient(ellipse, rgba(255,255,255,0.5) 0%, transparent 70%)',
+                                        'radial-gradient(ellipse, rgba(255,255,255,0.6) 0%, transparent 75%)',
                                 }}
                             />
                         </div>

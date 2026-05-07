@@ -14,7 +14,7 @@ export default function Footer() {
                     <div>
                         <div className='flex items-center gap-2.5 mb-3'>
                             <Image
-                                src='/ojoLogo.png'
+                                src='/Ojo_word_logo_White.png'
                                 alt='OJO'
                                 width={28}
                                 height={28}

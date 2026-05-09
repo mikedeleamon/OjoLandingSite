@@ -79,14 +79,16 @@ body {
   border-radius: 3px;
 }
 
-/* Focus ring */
+/* Focus ring — two-tone so it's visible on any background colour (WCAG 2.4.7) */
 *:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.8);
-  outline-offset: 2px;
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
   border-radius: 4px;
+  /* Dark outer halo ensures contrast on light gradient stops */
+  box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.55);
 }
 
-/* Reduced motion */
+/* Reduced motion — stop ALL CSS animations and transitions (WCAG 2.3.3) */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -94,6 +96,14 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* Explicitly freeze Tailwind animation utilities */
+  .animate-float,
+  .animate-float-slow,
+  .animate-pulse-slow,
+  .animate-gradient-shift {
+    animation: none !important;
   }
 }
 

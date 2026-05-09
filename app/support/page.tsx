@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useId } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { ChevronDown, Mail, Cloud, Shirt, Lock, FolderOpen, Camera, Trash2, Zap } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import { SUPPORT_EMAIL } from "@/lib/constants";
@@ -108,13 +108,19 @@ const categories = [
 
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
+  // useId generates a stable, unique id per instance — required to link
+  // aria-controls on the button to the id on the answer region (WCAG 1.3.1).
+  const uid      = useId();
+  const answerId = `faq-answer-${uid.replace(/:/g, '')}`;
+  const shouldReduce = useReducedMotion();
 
   return (
     <div className="border-b border-white/10 last:border-0">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-full flex items-start justify-between gap-4 py-4 text-left group"
+        className="w-full flex items-start justify-between gap-4 py-4 min-h-[44px] text-left group"
         aria-expanded={open}
+        aria-controls={answerId}
       >
         <span className="text-white font-dm font-medium text-sm leading-relaxed group-hover:text-white/90 transition-colors">
           {q}
@@ -125,14 +131,18 @@ function FaqItem({ q, a }: { q: string; a: string }) {
             open ? "rotate-180" : ""
           }`}
           strokeWidth={1.8}
+          aria-hidden="true"
         />
       </button>
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
+            id={answerId}
+            role="region"
+            aria-label={q}
+            initial={shouldReduce ? false : { height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
+            exit={shouldReduce ? undefined : { height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >

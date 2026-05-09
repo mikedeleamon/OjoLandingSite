@@ -84,7 +84,7 @@ export default function Footer() {
                         © {year} {APP_NAME}. All rights reserved.
                     </p>
                     <p className='text-white/35 text-xs'>
-                        Built with ☀ somewhere between sunny and partly cloudy.
+                        Built with <span aria-hidden="true">☀</span> somewhere between sunny and partly cloudy.
                     </p>
                 </div>
             </div>

@@ -2,6 +2,13 @@
 
 import { useState, useEffect, useRef } from 'react';
 
+// Reads the OS-level prefers-reduced-motion preference once on the client.
+// Returns true when the user has asked for less motion (WCAG 2.3.3).
+function prefersReducedMotion(): boolean {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
 // --- Timing ---
 const HOLD_MS = 2500; // how long each gradient is fully displayed
 const FADE_MS = 8000; // crossfade duration
@@ -69,14 +76,15 @@ const gradients = [
 export default function GradientBackground() {
     const indexRef = useRef(0);
     const [bottom, setBottom] = useState(gradients[0]);
-    const [top, setTop] = useState(gradients[1]);
+    const [top, setTop]       = useState(gradients[1]);
     const [topOpacity, setTopOpacity] = useState(0);
-    // isFading controls whether the CSS transition is active on the top layer.
-    // We ONLY enable it when fading in (0→1). On the reset (1→0) we set it
-    // false first so the reset is instant — this is what prevents the snap.
-    const [isFading, setIsFading] = useState(false);
+    const [isFading, setIsFading]     = useState(false);
 
     useEffect(() => {
+        // WCAG 2.3.3 — if the user prefers reduced motion, skip all animation
+        // and just show the static starting gradient forever.
+        if (prefersReducedMotion()) return;
+
         let holdTimer: ReturnType<typeof setTimeout>;
         let fadeTimer: ReturnType<typeof setTimeout>;
         let alive = true;
@@ -85,12 +93,8 @@ export default function GradientBackground() {
             holdTimer = setTimeout(() => {
                 if (!alive) return;
 
-                // Step 1: enable transition in this render pass
                 setIsFading(true);
 
-                // Step 2: after the browser has painted the transition style,
-                // change opacity so the animation actually fires.
-                // Two rAF calls guarantee we're past React's render + browser paint.
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
                         if (!alive) return;
@@ -101,15 +105,9 @@ export default function GradientBackground() {
                 fadeTimer = setTimeout(() => {
                     if (!alive) return;
 
-                    // Advance the index
-                    indexRef.current =
-                        (indexRef.current + 1) % gradients.length;
-                    const nextIdx = (indexRef.current + 1) % gradients.length;
+                    indexRef.current = (indexRef.current + 1) % gradients.length;
+                    const nextIdx    = (indexRef.current + 1) % gradients.length;
 
-                    // Atomically: disable transition + reset opacity to 0 + swap layers.
-                    // React 18 batches all four of these into a single render so the
-                    // "top layer hidden" and "bottom layer promoted" happen in the same
-                    // frame — no flash, no snap.
                     setIsFading(false);
                     setTopOpacity(0);
                     setBottom(gradients[indexRef.current]);
@@ -135,26 +133,29 @@ export default function GradientBackground() {
             style={{ zIndex: -10 }}
             aria-hidden='true'
         >
-            {/* Bottom layer — always fully opaque, shows the current gradient */}
-            <div
-                className='absolute inset-0'
-                style={{ background: bottom }}
-            />
+            {/* Bottom layer */}
+            <div className='absolute inset-0' style={{ background: bottom }} />
 
-            {/* Top layer — fades in over the bottom, then is instantly hidden on swap */}
+            {/* Top layer — fades in, then swaps instantly */}
             <div
                 className='absolute inset-0'
                 style={{
                     background: top,
                     opacity: topOpacity,
-                    // Only activate the transition during the fade-in pass.
-                    // During reset the transition is 'none', so opacity snaps to 0
-                    // invisibly (bottom is already showing the promoted gradient).
                     transition: isFading
                         ? `opacity ${FADE_MS}ms cubic-bezier(0.76, 0, 0.24, 1)`
                         : 'none',
                 }}
             />
+
+            {/*
+             * Contrast scrim (WCAG 1.4.3) — a persistent dark overlay that
+             * boosts white-on-gradient contrast across ALL gradient states.
+             * The gradient palette includes light stops (snow, hazy, sunny)
+             * where unaided white text would fail 4.5:1. This scrim brings
+             * those stops into compliance without altering the visual design.
+             */}
+            <div className='absolute inset-0' style={{ background: 'rgba(0,0,0,0.28)' }} />
         </div>
     );
 }

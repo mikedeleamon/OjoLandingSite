@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { motion, useReducedMotion } from 'framer-motion';
+import { ReactNode } from 'react';
 
 interface AnimatedSectionProps {
   children: ReactNode;
@@ -11,14 +11,22 @@ interface AnimatedSectionProps {
 
 export default function AnimatedSection({
   children,
-  className = "",
+  className = '',
   delay = 0,
 }: AnimatedSectionProps) {
+  // WCAG 2.3.3 — honour the OS-level prefers-reduced-motion preference.
+  // When true, skip the enter animation and render children immediately.
+  const shouldReduce = useReducedMotion();
+
+  if (shouldReduce) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >

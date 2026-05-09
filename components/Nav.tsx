@@ -74,18 +74,24 @@ export default function Nav() {
 
                 {/* Mobile menu toggle */}
                 <button
-                    className='md:hidden glass rounded-full p-2 text-white'
+                    className='md:hidden glass rounded-full p-2 text-white min-w-[44px] min-h-[44px] flex items-center justify-center'
                     onClick={() => setOpen((v) => !v)}
                     aria-label={open ? 'Close menu' : 'Open menu'}
                     aria-expanded={open}
+                    aria-controls="mobile-nav-menu"
                 >
                     {open ? <X size={18} /> : <Menu size={18} />}
                 </button>
             </nav>
 
-            {/* Mobile drawer */}
+            {/* Mobile drawer — id matches aria-controls on the toggle button */}
             {open && (
-                <div className='md:hidden glass-strong border-t border-white/20 px-6 py-4'>
+                <div
+                    id="mobile-nav-menu"
+                    className='md:hidden glass-strong border-t border-white/20 px-6 py-4'
+                    role="navigation"
+                    aria-label="Mobile navigation"
+                >
                     <ul
                         className='flex flex-col gap-1'
                         role='list'

@@ -9,7 +9,7 @@ export default function PageHeader({ eyebrow, title, subtitle }: PageHeaderProps
     <div className="pt-32 pb-12 px-6">
       <div className="max-w-3xl mx-auto text-center">
         {eyebrow && (
-          <p className="text-white/60 text-xs font-semibold uppercase tracking-widest mb-3 font-outfit">
+          <p className="text-white text-xs font-semibold uppercase tracking-widest mb-3 font-outfit">
             {eyebrow}
           </p>
         )}
@@ -17,7 +17,7 @@ export default function PageHeader({ eyebrow, title, subtitle }: PageHeaderProps
           {title}
         </h1>
         {subtitle && (
-          <p className="text-white/70 text-base md:text-lg leading-relaxed max-w-xl mx-auto font-dm">
+          <p className="text-white text-base md:text-lg leading-relaxed max-w-xl mx-auto font-dm">
             {subtitle}
           </p>
         )}

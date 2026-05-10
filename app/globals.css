@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --color-mint: #2dd4bf;
-  --color-lime: #a3e635;
-  --color-teal: #06b6d4;
-  --gradient-main: linear-gradient(160deg, #2dd4bf 0%, #10b981 40%, #a3e635 100%);
+  --color-mint: #0d9488;
+  --color-lime: #65a30d;
+  --color-teal: #059669;
+  --gradient-main: linear-gradient(160deg, #0d9488 0%, #059669 40%, #65a30d 100%);
 }
 
 html {

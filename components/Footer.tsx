@@ -22,13 +22,13 @@ export default function Footer() {
                             />
                             <span className='font-outfit font-semibold text-white text-base'></span>
                         </div>
-                        <p className='text-white/60 text-sm leading-relaxed'>
+                        <p className='text-white text-sm leading-relaxed'>
                             Your weather-aware outfit companion. Dress smarter,
                             every day.
                         </p>
                         <div className='mt-4 inline-flex items-center gap-2 glass rounded-full px-3 py-1.5'>
                             <span className='w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse-slow' />
-                            <span className='text-white/70 text-xs font-medium'>
+                            <span className='text-white text-xs font-medium'>
                                 Coming soon to App Store
                             </span>
                         </div>
@@ -36,7 +36,7 @@ export default function Footer() {
 
                     {/* Legal */}
                     <div>
-                        <p className='text-white/50 text-xs font-semibold uppercase tracking-widest mb-3'>
+                        <p className='text-white text-xs font-semibold uppercase tracking-widest mb-3'>
                             Legal
                         </p>
                         <ul
@@ -47,7 +47,7 @@ export default function Footer() {
                                 <li key={link.href}>
                                     <Link
                                         href={link.href}
-                                        className='text-white/70 text-sm hover:text-white transition-colors'
+                                        className='text-white text-sm hover:text-white/80 transition-colors'
                                     >
                                         {link.label}
                                     </Link>
@@ -58,12 +58,12 @@ export default function Footer() {
 
                     {/* Contact */}
                     <div>
-                        <p className='text-white/50 text-xs font-semibold uppercase tracking-widest mb-3'>
+                        <p className='text-white text-xs font-semibold uppercase tracking-widest mb-3'>
                             Contact
                         </p>
                         <a
                             href={`mailto:${SUPPORT_EMAIL}`}
-                            className='flex items-center gap-2 text-white/70 text-sm hover:text-white transition-colors group'
+                            className='flex items-center gap-2 text-white text-sm hover:text-white/80 transition-colors group'
                         >
                             <Mail
                                 size={14}
@@ -71,7 +71,7 @@ export default function Footer() {
                             />
                             {SUPPORT_EMAIL}
                         </a>
-                        <p className='text-white/45 text-xs mt-3 leading-relaxed'>
+                        <p className='text-white text-xs mt-3 leading-relaxed'>
                             We typically respond within 24–48 hours on business
                             days.
                         </p>
@@ -80,10 +80,10 @@ export default function Footer() {
 
                 {/* Bottom bar */}
                 <div className='border-t border-white/15 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2'>
-                    <p className='text-white/45 text-xs'>
+                    <p className='text-white text-xs'>
                         © {year} {APP_NAME}. All rights reserved.
                     </p>
-                    <p className='text-white/35 text-xs'>
+                    <p className='text-white text-xs'>
                         Built with <span aria-hidden="true">☀</span> somewhere between sunny and partly cloudy.
                     </p>
                 </div>

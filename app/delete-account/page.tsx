@@ -56,7 +56,7 @@ export default function DeleteAccountPage() {
           <AlertCircle size={20} className="text-white mt-0.5 flex-shrink-0" strokeWidth={1.8} />
           <div>
             <p className="text-white font-outfit font-semibold text-sm mb-1">Permanent action</p>
-            <p className="text-white/70 text-sm font-dm leading-relaxed">
+            <p className="text-white text-sm font-dm leading-relaxed">
               Deleting your account is irreversible. All your closets, outfit
               history, and personal data will be permanently erased within 30 days.
               There is no way to recover this data after deletion.
@@ -88,15 +88,15 @@ export default function DeleteAccountPage() {
                 </div>
                 <div className="pb-5">
                   <p className="text-white font-outfit font-semibold text-sm mb-1">{s.title}</p>
-                  <p className="text-white/65 text-sm font-dm leading-relaxed">{s.description}</p>
+                  <p className="text-white text-sm font-dm leading-relaxed">{s.description}</p>
                 </div>
               </div>
             ))}
           </div>
 
           <div className="mt-4 glass-subtle rounded-xl px-4 py-3 flex items-start gap-2.5">
-            <CheckCircle size={15} className="text-white/70 mt-0.5 flex-shrink-0" strokeWidth={1.8} />
-            <p className="text-white/65 text-xs font-dm leading-relaxed">
+            <CheckCircle size={15} aria-hidden="true" className="text-white/70 mt-0.5 flex-shrink-0" strokeWidth={1.8} />
+            <p className="text-white text-xs font-dm leading-relaxed">
               In-app account deletion is coming in a future update. Until then, use
               the email method below to request deletion.
             </p>
@@ -113,7 +113,7 @@ export default function DeleteAccountPage() {
               Request deletion by email
             </h2>
           </div>
-          <p className="text-white/70 text-sm font-dm leading-relaxed mb-5">
+          <p className="text-white text-sm font-dm leading-relaxed mb-5">
             Send a deletion request from the email address registered to your
             account. Include "Delete My Account" in the subject line. We'll verify
             your identity and process the request within 30 days.
@@ -125,7 +125,7 @@ export default function DeleteAccountPage() {
             <Trash2 size={14} />
             Email deletion request
           </a>
-          <p className="text-white/45 text-xs font-dm mt-4">
+          <p className="text-white text-xs font-dm mt-4">
             Sending from a different email? Include your registered email address
             in the message body so we can locate your account.
           </p>
@@ -141,20 +141,20 @@ export default function DeleteAccountPage() {
               What gets deleted
             </h2>
           </div>
-          <p className="text-white/70 text-sm font-dm leading-relaxed mb-5">
+          <p className="text-white text-sm font-dm leading-relaxed mb-5">
             Once your request is confirmed, the following data will be permanently
             deleted from our systems within <strong className="text-white">30 days</strong>:
           </p>
           <ul className="flex flex-col gap-2.5">
             {deletedItems.map((item) => (
               <li key={item} className="flex items-start gap-3">
-                <CheckCircle size={15} className="text-white/60 mt-0.5 flex-shrink-0" strokeWidth={1.8} />
-                <span className="text-white/75 text-sm font-dm">{item}</span>
+                <CheckCircle size={15} aria-hidden="true" className="text-white/60 mt-0.5 flex-shrink-0" strokeWidth={1.8} />
+                <span className="text-white text-sm font-dm">{item}</span>
               </li>
             ))}
           </ul>
           <div className="mt-5 glass-subtle rounded-xl px-4 py-3">
-            <p className="text-white/55 text-xs font-dm leading-relaxed">
+            <p className="text-white text-xs font-dm leading-relaxed">
               Some anonymized, aggregated analytics data not linked to your
               identity may be retained after deletion for product improvement
               purposes.

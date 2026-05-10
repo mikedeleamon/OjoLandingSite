@@ -146,7 +146,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >
-            <p className="text-white/65 text-sm font-dm leading-relaxed pb-4">{a}</p>
+            <p className="text-white text-sm font-dm leading-relaxed pb-4">{a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -193,7 +193,7 @@ export default function SupportPage() {
           <h2 className="font-outfit font-bold text-white text-xl mb-2">
             Still need help?
           </h2>
-          <p className="text-white/65 text-sm font-dm leading-relaxed mb-5 max-w-sm mx-auto">
+          <p className="text-white text-sm font-dm leading-relaxed mb-5 max-w-sm mx-auto">
             Send us a message and we'll get back to you within 24–48 hours on
             business days. Include your device model and iOS version for faster
             support.
@@ -205,7 +205,7 @@ export default function SupportPage() {
             <Mail size={14} />
             {SUPPORT_EMAIL}
           </a>
-          <p className="text-white/40 text-xs font-dm mt-4">
+          <p className="text-white text-xs font-dm mt-4">
             Response time: 24–48 business hours
           </p>
         </div>

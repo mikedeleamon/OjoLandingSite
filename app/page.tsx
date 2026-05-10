@@ -152,7 +152,7 @@ export default function HomePage() {
                             delay: 0.3,
                             ease: [0.22, 1, 0.36, 1],
                         }}
-                        className='text-white/75 text-lg md:text-xl leading-relaxed max-w-xl mx-auto mb-10 font-dm'
+                        className='text-white text-lg md:text-xl leading-relaxed max-w-xl mx-auto mb-10 font-dm'
                     >
                         OJO reads the forecast, knows your wardrobe, and tells
                         you exactly what to wear — every single day.
@@ -241,7 +241,7 @@ export default function HomePage() {
                         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                         className='text-center mb-14'
                     >
-                        <p className='text-white/55 text-xs font-semibold uppercase tracking-widest font-outfit mb-3'>
+                        <p className='text-white text-xs font-semibold uppercase tracking-widest font-outfit mb-3'>
                             What OJO does
                         </p>
                         <h2
@@ -281,7 +281,7 @@ export default function HomePage() {
                                     <h3 className='font-outfit font-semibold text-white text-base mb-2'>
                                         {feature.title}
                                     </h3>
-                                    <p className='text-white/65 text-sm leading-relaxed font-dm'>
+                                    <p className='text-white text-sm leading-relaxed font-dm'>
                                         {feature.description}
                                     </p>
                                 </motion.div>
@@ -310,7 +310,7 @@ export default function HomePage() {
                         >
                             Transparency & support
                         </h2>
-                        <p className='text-white/60 text-sm font-dm'>
+                        <p className='text-white text-sm font-dm'>
                             Everything you need to know about your data and how
                             to get help.
                         </p>
@@ -345,13 +345,14 @@ export default function HomePage() {
                                             <p className='font-outfit font-semibold text-white text-sm'>
                                                 {link.label}
                                             </p>
-                                            <p className='text-white/55 text-xs font-dm'>
+                                            <p className='text-white text-xs font-dm'>
                                                 {link.desc}
                                             </p>
                                         </div>
                                         <ChevronRight
                                             size={16}
-                                            className='text-white/40 group-hover:text-white/70 group-hover:translate-x-0.5 transition-all duration-200 flex-shrink-0'
+                                            aria-hidden="true"
+                                            className='text-white/50 group-hover:text-white group-hover:translate-x-0.5 transition-all duration-200 flex-shrink-0'
                                         />
                                     </Link>
                                 </motion.div>
@@ -370,13 +371,13 @@ export default function HomePage() {
                     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                     className='max-w-2xl mx-auto glass-strong rounded-3xl p-8 md:p-10 text-center'
                 >
-                    <p className='text-white/50 text-xs font-semibold uppercase tracking-widest font-outfit mb-3'>
+                    <p className='text-white text-xs font-semibold uppercase tracking-widest font-outfit mb-3'>
                         Questions?
                     </p>
                     <h2 className='font-outfit font-bold text-2xl text-white mb-3'>
                         We'd love to hear from you.
                     </h2>
-                    <p className='text-white/65 text-sm font-dm mb-6 leading-relaxed'>
+                    <p className='text-white text-sm font-dm mb-6 leading-relaxed'>
                         Reach out with feedback, bug reports, or anything on
                         your mind. We respond within 48 hours.
                     </p>

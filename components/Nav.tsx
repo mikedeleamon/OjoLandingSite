@@ -62,7 +62,7 @@ export default function Nav() {
                                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                                         active
                                             ? 'glass text-white'
-                                            : 'text-white/80 hover:text-white hover:glass'
+                                            : 'text-white hover:glass'
                                     }`}
                                 >
                                     {link.label}
@@ -105,7 +105,7 @@ export default function Nav() {
                                         className={`block px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
                                             active
                                                 ? 'glass text-white'
-                                                : 'text-white/80 hover:text-white hover:glass'
+                                                : 'text-white hover:glass'
                                         }`}
                                     >
                                         {link.label}

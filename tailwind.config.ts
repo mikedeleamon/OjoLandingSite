@@ -13,16 +13,16 @@ const config: Config = {
         dm: ["var(--font-dm-sans)", "sans-serif"],
       },
       colors: {
-        mint: "#2DD4BF",
-        lime: "#A3E635",
+        mint: "#0D9488",
+        lime: "#65A30D",
         teal: {
-          soft: "#06B6D4",
-          deep: "#0891B2",
+          soft: "#059669",
+          deep: "#047857",
         },
       },
       backgroundImage: {
-        "ojo-gradient": "linear-gradient(160deg, #2DD4BF 0%, #10B981 40%, #A3E635 100%)",
-        "ojo-gradient-subtle": "linear-gradient(160deg, #2DD4BF 0%, #14B8A6 40%, #9ADE21 100%)",
+        "ojo-gradient": "linear-gradient(160deg, #0D9488 0%, #059669 40%, #65A30D 100%)",
+        "ojo-gradient-subtle": "linear-gradient(160deg, #0D9488 0%, #059669 40%, #4D7C0F 100%)",
         "glass-gradient": "linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 100%)",
       },
       animation: {

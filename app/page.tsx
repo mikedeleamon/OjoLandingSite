@@ -205,7 +205,7 @@ export default function HomePage() {
                     >
                         <div className='relative'>
                             <Image
-                                src='/framedImage.png'
+                                src='/framedimage.png'
                                 alt='OJO app preview'
                                 width={320}
                                 height={640}

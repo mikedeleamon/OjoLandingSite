@@ -36,11 +36,11 @@ export const metadata: Metadata = {
     ],
     authors: [{ name: 'OJO App' }],
     creator: 'OJO App',
-    metadataBase: new URL('http://ojoapp.io'),
+    metadataBase: new URL('https://ojoapp.io'),
     openGraph: {
         type: 'website',
         locale: 'en_US',
-        url: 'http://ojoapp.io',
+        url: 'https://ojoapp.io',
         title: 'OJO — Dress for the weather.',
         description:
             'Your weather-aware outfit companion. Smart outfit suggestions powered by your local forecast.',

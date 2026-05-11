@@ -62,14 +62,10 @@ export const metadata: Metadata = {
         images: ['/og-image.png'],
     },
     icons: {
-        icon: [
-            { url: '/favicon.ico' },
-            { url: '/icon-16.png', sizes: '16x16', type: 'image/png' },
-            { url: '/icon-32.png', sizes: '32x32', type: 'image/png' },
-        ],
+        icon: [{ url: '/ojo_app_icon@1x.png' }],
         apple: [
             {
-                url: '/apple-touch-icon.png',
+                url: '/ojo_app_icon@1x.png',
                 sizes: '180x180',
                 type: 'image/png',
             },

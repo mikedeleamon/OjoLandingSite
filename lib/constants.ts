@@ -1,4 +1,4 @@
-export const SUPPORT_EMAIL = "support@ojo-app.com";
+export const SUPPORT_EMAIL = "support@ojoapp.io";
 export const APP_NAME = "OJO";
 export const APP_TAGLINE = "Dress for the weather.";
 export const APP_DESCRIPTION =
@@ -6,7 +6,7 @@ export const APP_DESCRIPTION =
 export const COMPANY_NAME = "OJO App";
 export const EFFECTIVE_DATE = "June 15, 2026";
 export const APP_STORE_URL = "#"; // Replace with real App Store URL when live
-export const WEBSITE_URL = "https://ojo-app.com"; // Replace with real domain
+export const WEBSITE_URL = "http://ojoapp.io"; // Replace with real domain
 
 export const NAV_LINKS = [
   { label: "Home", href: "/" },

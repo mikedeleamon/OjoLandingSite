@@ -10,6 +10,8 @@ import {
     History,
     FolderOpen,
     Sparkles,
+    Plane,
+    Bell,
     ChevronRight,
     Mail,
     ShieldCheck,
@@ -24,13 +26,13 @@ const features = [
         icon: Sparkles,
         title: 'Smart outfit suggestions',
         description:
-            "OJO analyzes today's forecast — temperature, feels-like, humidity, wind — and recommends a complete outfit from your actual closet.",
+            "On-device machine learning reads today's forecast — temperature, feels-like, humidity, wind — and recommends a complete outfit from your actual closet.",
     },
     {
         icon: Cloud,
         title: 'Live weather integration',
         description:
-            "Powered by AccuWeather's real-time data. OJO knows when the morning is cold but the afternoon warms up, and layers accordingly.",
+            "Powered by Apple WeatherKit's real-time data. OJO knows when the morning is cold but the afternoon warms up, and layers accordingly.",
     },
     {
         icon: Shirt,
@@ -55,6 +57,18 @@ const features = [
         title: 'Outfit history',
         description:
             "Track what you've worn and when. OJO uses your history to avoid repeating outfits and surface fresh combinations.",
+    },
+    {
+        icon: Plane,
+        title: 'Smart Trip Planner',
+        description:
+            "Heading somewhere? Add your destinations and dates, and OJO suggests what to pack based on the forecast where you're going.",
+    },
+    {
+        icon: Bell,
+        title: 'Daily brief & alerts',
+        description:
+            'Wake up to a morning outfit brief, and get a heads-up when the forecast shifts — so you’re never caught underdressed.',
     },
 ];
 

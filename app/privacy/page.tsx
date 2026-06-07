@@ -93,10 +93,10 @@ export default function PrivacyPolicyPage() {
                         </li>
                         <li>
                             <strong style={{ color: 'white' }}>
-                                Clothing and wardrobe data
+                                Clothing item photos and metadata
                             </strong>{' '}
-                            — descriptions, categories, colours, fabrics, and
-                            images of clothing items
+                            — images you upload or capture of your garments,
+                            plus descriptions, categories, colours, and fabrics
                         </li>
                         <li>
                             <strong style={{ color: 'white' }}>
@@ -107,16 +107,25 @@ export default function PrivacyPolicyPage() {
                         </li>
                         <li>
                             <strong style={{ color: 'white' }}>
-                                Device information
+                                Push notification token
                             </strong>{' '}
-                            — device model, OS version, and app version
+                            — a device-specific token used solely to deliver
+                            notifications you have enabled (e.g. morning brief,
+                            weather changes)
                         </li>
                         <li>
                             <strong style={{ color: 'white' }}>
-                                Usage analytics
+                                Trip information (optional)
                             </strong>{' '}
-                            — feature interactions and session duration
-                            (aggregated and anonymised)
+                            — destinations and travel dates you enter for the
+                            Smart Trip Planner, used to suggest what to pack
+                            based on the forecast at your destination
+                        </li>
+                        <li>
+                            <strong style={{ color: 'white' }}>
+                                Device information
+                            </strong>{' '}
+                            — device model, OS version, and app version
                         </li>
                         <li>
                             <strong style={{ color: 'white' }}>
@@ -141,7 +150,8 @@ export default function PrivacyPolicyPage() {
                         generating personalised outfit suggestions based on your
                         closet, preferences, and local weather; remembering your
                         style preferences and outfit history across sessions;
-                        and diagnosing crashes.
+                        sending notifications you have enabled; powering the
+                        optional Smart Trip Planner; and diagnosing crashes.
                     </p>
                     <p>
                         We do not use your data for advertising, and we do not
@@ -151,11 +161,14 @@ export default function PrivacyPolicyPage() {
                     {/* ── 4. How We Store and Protect Your Information ── */}
                     <h2>4. How We Store and Protect Your Information</h2>
                     <p>
-                        Your account data, closets, and clothing articles are
-                        stored in MongoDB Atlas, a cloud database service. All
-                        data is transmitted over http/TLS encrypted connections.
-                        We implement access controls limiting database access to
-                        authorised systems only.
+                        Your account data, closet metadata, outfit history, and
+                        trip information are stored in MongoDB Atlas, a cloud
+                        database service. The images of your clothing items are
+                        stored on Cloudflare R2, an object-storage service used
+                        as our image CDN; image filenames are random identifiers
+                        that contain no personal information. All data is
+                        transmitted over HTTPS/TLS encrypted connections, and
+                        access is limited to authorised systems.
                     </p>
                     <p>
                         No method of electronic storage or transmission is 100%
@@ -167,23 +180,49 @@ export default function PrivacyPolicyPage() {
                     <h2>5. Third-Party Services</h2>
                     <p>
                         The App uses a limited number of third-party services to
-                        function:
+                        function. Each service receives only the data needed to
+                        perform its role:
                     </p>
                     <ul>
                         <li>
                             <strong style={{ color: 'white' }}>
-                                AccuWeather API
+                                MongoDB Atlas
                             </strong>{' '}
-                            — used to retrieve weather conditions for your
-                            specified city. Your city name is sent to
-                            AccuWeather to fetch local weather data.
+                            — cloud database used to store your account, closet
+                            metadata, outfit history, and trip information.
                         </li>
                         <li>
                             <strong style={{ color: 'white' }}>
-                                MongoDB Atlas
+                                Cloudflare R2
                             </strong>{' '}
-                            — cloud database provider used to store your account
-                            and wardrobe data.
+                            — object storage used to host the clothing item
+                            images you upload or capture. Images are served via
+                            CDN over HTTPS.
+                        </li>
+                        <li>
+                            <strong style={{ color: 'white' }}>
+                                Apple WeatherKit
+                            </strong>{' '}
+                            — receives the latitude/longitude resolved from the
+                            city you have set in order to return local weather
+                            conditions. Apple does not receive your account
+                            identifier. See{' '}
+                            <a
+                                href='https://weatherkit.apple.com/legal-attribution.html'
+                                target='_blank'
+                                rel='noopener noreferrer'
+                            >
+                                Apple's data-source attribution
+                            </a>{' '}
+                            for the full list of data sources.
+                        </li>
+                        <li>
+                            <strong style={{ color: 'white' }}>
+                                Expo Push Notification Service
+                            </strong>{' '}
+                            — receives your device push token (and the contents
+                            of the notifications you have enabled) so it can
+                            deliver them to your device.
                         </li>
                     </ul>
 
@@ -199,8 +238,9 @@ export default function PrivacyPolicyPage() {
                             <strong style={{ color: 'white' }}>
                                 Service providers:
                             </strong>{' '}
-                            Third-party vendors (e.g., MongoDB Atlas) under
-                            strict confidentiality obligations.
+                            Third-party vendors (MongoDB Atlas, Cloudflare R2,
+                            Apple WeatherKit, and Expo Push) acting on our behalf
+                            under their published privacy and security terms.
                         </li>
                         <li>
                             <strong style={{ color: 'white' }}>

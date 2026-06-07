@@ -2,7 +2,7 @@
 
 import { useState, useId } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { ChevronDown, Mail, Cloud, Shirt, Lock, FolderOpen, Camera, Trash2, Zap } from "lucide-react";
+import { ChevronDown, Mail, Cloud, Shirt, Lock, FolderOpen, Camera, Trash2, Zap, Plane, Bell } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import { SUPPORT_EMAIL } from "@/lib/constants";
 import type { Metadata } from "next";
@@ -28,11 +28,11 @@ const categories = [
     faqs: [
       {
         q: "Why isn't weather loading?",
-        a: "Weather requires location access. Check that OJO has permission to access your location in your device's Settings → Privacy → Location Services → OJO. If permissions are correct, try force-quitting the app and reopening it. If the issue persists, your device may have a network connectivity problem — try switching between Wi-Fi and cellular.",
+        a: "OJO fetches the forecast for the city you've set, so first make sure a city is entered under Settings → Location. If one is set and weather still won't load, try force-quitting the app and reopening it. If the issue persists, your device may have a network connectivity problem — try switching between Wi-Fi and cellular.",
       },
       {
         q: "The weather data seems wrong for my area.",
-        a: "OJO uses AccuWeather's real-time data, which is generally very accurate. If the data looks off, try refreshing by pulling down on the main screen. In rare cases, AccuWeather may not have a nearby station — contact us and we'll investigate.",
+        a: "OJO uses Apple WeatherKit's real-time data, which is generally very accurate. First double-check that the city set in Settings → Location is correct, then refresh by pulling down on the main screen. If it still looks off, contact us and we'll investigate.",
       },
       {
         q: "Can I see a multi-day forecast?",
@@ -59,6 +59,34 @@ const categories = [
     ],
   },
   {
+    icon: Plane,
+    label: "Trip Planner",
+    faqs: [
+      {
+        q: "What is the Smart Trip Planner?",
+        a: "The Smart Trip Planner helps you pack for upcoming travel. Add a trip with its destination and dates, and OJO looks at the forecast where you're going and suggests what to pack from your closet.",
+      },
+      {
+        q: "How do I add a trip?",
+        a: "Open the Trip Planner, tap the + button, and enter your destination city and travel dates. OJO will generate packing suggestions based on the destination's forecast. You can edit or remove a trip at any time.",
+      },
+    ],
+  },
+  {
+    icon: Bell,
+    label: "Notifications",
+    faqs: [
+      {
+        q: "What notifications does OJO send?",
+        a: "OJO can send a morning outfit brief with the day's recommendation, and alerts when the forecast for your city changes significantly. You choose which notifications to enable — OJO never sends marketing messages.",
+      },
+      {
+        q: "How do I turn notifications on or off?",
+        a: "Go to Settings → Notifications inside OJO to toggle the morning brief and weather alerts individually. You can also manage OJO's notification permission in your device's Settings → Notifications → OJO.",
+      },
+    ],
+  },
+  {
     icon: Camera,
     label: "Photos",
     faqs: [
@@ -68,7 +96,7 @@ const categories = [
       },
       {
         q: "Are my photos stored securely?",
-        a: "Yes. Your clothing photos are stored encrypted in our cloud database and are only accessible to your account. We do not use your photos for any purpose beyond displaying them in your closet. See our Privacy Policy for full details.",
+        a: "Yes. Your clothing photos are stored on Cloudflare R2 object storage and served over HTTPS, with filenames that contain no personal information. We do not use your photos for any purpose beyond displaying them in your closet. See our Privacy Policy for full details.",
       },
     ],
   },

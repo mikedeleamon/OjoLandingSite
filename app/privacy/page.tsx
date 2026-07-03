@@ -86,17 +86,23 @@ export default function PrivacyPolicyPage() {
                         </li>
                         <li>
                             <strong style={{ color: 'white' }}>
-                                Location (city name)
+                                Location
                             </strong>{' '}
-                            — entered manually to retrieve local weather data
-                            for outfit suggestions
+                            — either a city name you enter manually, or, if you
+                            choose "My Location," your device's GPS coordinates
+                            read on demand at that moment. Location is used
+                            solely to retrieve local weather for outfit
+                            suggestions; coordinates are sent only for the
+                            weather lookup and are not stored or tracked in the
+                            background
                         </li>
                         <li>
                             <strong style={{ color: 'white' }}>
                                 Clothing item photos and metadata
                             </strong>{' '}
                             — images you upload or capture of your garments,
-                            plus descriptions, categories, colours, and fabrics
+                            plus descriptions, categories, colours, fabrics, and
+                            (optionally) merchant and purchase price
                         </li>
                         <li>
                             <strong style={{ color: 'white' }}>
@@ -117,9 +123,10 @@ export default function PrivacyPolicyPage() {
                             <strong style={{ color: 'white' }}>
                                 Trip information (optional)
                             </strong>{' '}
-                            — destinations and travel dates you enter for the
-                            Smart Trip Planner, used to suggest what to pack
-                            based on the forecast at your destination
+                            — for trips you add, the airline, confirmation
+                            number, travel dates, origin/destination airports,
+                            and destination city, plus any outfit plans you
+                            build for them
                         </li>
                         <li>
                             <strong style={{ color: 'white' }}>
@@ -138,8 +145,10 @@ export default function PrivacyPolicyPage() {
                     <h3>2.3 Information We Do NOT Collect</h3>
                     <p>
                         We do not collect financial or payment information,
-                        real-time GPS location, social media profiles, or
-                        biometric data of any kind.
+                        social media profiles, or biometric data of any kind. We
+                        do not track your location in the background or store
+                        your GPS coordinates — see the Location entry above for
+                        how one-time, on-demand location is used.
                     </p>
 
                     {/* ── 3. How We Use Your Information ── */}
@@ -151,7 +160,7 @@ export default function PrivacyPolicyPage() {
                         closet, preferences, and local weather; remembering your
                         style preferences and outfit history across sessions;
                         sending notifications you have enabled; powering the
-                        optional Smart Trip Planner; and diagnosing crashes.
+                        optional trip planner; and diagnosing crashes.
                     </p>
                     <p>
                         We do not use your data for advertising, and we do not
@@ -224,6 +233,16 @@ export default function PrivacyPolicyPage() {
                             of the notifications you have enabled) so it can
                             deliver them to your device.
                         </li>
+                        <li>
+                            <strong style={{ color: 'white' }}>
+                                Google Sign-In (optional)
+                            </strong>{' '}
+                            — if you choose to sign in with Google, Google
+                            returns your email address and basic profile
+                            information so we can create and authenticate your
+                            account. We do not request access to your Gmail,
+                            contacts, or any other Google data.
+                        </li>
                     </ul>
 
                     {/* ── 6. Data Sharing and Disclosure ── */}
@@ -239,8 +258,9 @@ export default function PrivacyPolicyPage() {
                                 Service providers:
                             </strong>{' '}
                             Third-party vendors (MongoDB Atlas, Cloudflare R2,
-                            Apple WeatherKit, and Expo Push) acting on our behalf
-                            under their published privacy and security terms.
+                            Apple WeatherKit, Expo Push, and — if you use
+                            Google Sign-In — Google) acting on our behalf under
+                            their published privacy and security terms.
                         </li>
                         <li>
                             <strong style={{ color: 'white' }}>

@@ -25,13 +25,13 @@ const steps = [
   },
   {
     step: "2",
-    title: "Go to Account Settings",
-    description: 'Tap the profile icon or navigate to Settings → Account to open your account page.',
+    title: "Open your Profile",
+    description: 'From the app, go to Account → Profile to open your profile page.',
   },
   {
     step: "3",
-    title: "Select \"Delete Account\"",
-    description: 'Scroll to the bottom of the Account page and tap "Delete Account." You\'ll be asked to confirm.',
+    title: "Tap \"Delete account\"",
+    description: 'Scroll to the danger zone at the bottom of the Profile page and tap "Delete account." You\'ll be asked to confirm.',
   },
   {
     step: "4",
@@ -97,8 +97,9 @@ export default function DeleteAccountPage() {
           <div className="mt-4 glass-subtle rounded-xl px-4 py-3 flex items-start gap-2.5">
             <CheckCircle size={15} aria-hidden="true" className="text-white/70 mt-0.5 flex-shrink-0" strokeWidth={1.8} />
             <p className="text-white text-xs font-dm leading-relaxed">
-              In-app account deletion is coming in a future update. Until then, use
-              the email method below to request deletion.
+              Deleting in-app permanently removes your account and all associated
+              data within 30 days. Prefer to delete by email instead? Use the
+              method below.
             </p>
           </div>
         </div>

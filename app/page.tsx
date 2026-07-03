@@ -11,6 +11,9 @@ import {
     FolderOpen,
     Sparkles,
     Plane,
+    Navigation,
+    Fingerprint,
+    BarChart3,
     Bell,
     ChevronRight,
     Mail,
@@ -19,14 +22,14 @@ import {
     Trash2,
     HeadphonesIcon,
 } from 'lucide-react';
-import { SUPPORT_EMAIL, APP_STORE_URL } from '@/lib/constants';
+import { SUPPORT_EMAIL, TESTFLIGHT_URL } from '@/lib/constants';
 
 const features = [
     {
         icon: Sparkles,
         title: 'Smart outfit suggestions',
         description:
-            "On-device machine learning reads today's forecast — temperature, feels-like, humidity, wind — and recommends a complete outfit from your actual closet.",
+            "OJO scores every outfit across fabric, color harmony, formality, and your personal style, then matches it to today's forecast — temperature, feels-like, humidity, wind — using clothes you actually own. Switch occasions (Work, Date, Outdoor) and it re-ranks instantly.",
     },
     {
         icon: Cloud,
@@ -38,13 +41,25 @@ const features = [
         icon: Shirt,
         title: 'Your closet, organized',
         description:
-            'Add clothing articles with type, color, and fabric. OJO learns what you own so it can recommend what you actually have.',
+            "Add clothing by type, color, and fabric — or just snap a photo and OJO's on-device ML identifies the garment. Your images never leave your phone during recognition.",
     },
     {
         icon: Layers,
         title: 'Layering intelligence',
         description:
             'On days with big temperature swings, OJO flags exactly which layers you can shed mid-day — with confidence scores and timing.',
+    },
+    {
+        icon: Fingerprint,
+        title: 'Style that learns you',
+        description:
+            'The more outfits you log, the sharper OJO gets. It builds a Style DNA — your signature colors and go-to fabrics — and shifts recommendations toward what is genuinely you.',
+    },
+    {
+        icon: BarChart3,
+        title: 'Wardrobe Insights',
+        description:
+            "See how much of your closet you actually wear, cost-per-wear for every item, your total wardrobe value, and which pieces are 'sleeping' — then queue them for donation in a tap.",
     },
     {
         icon: FolderOpen,
@@ -56,13 +71,19 @@ const features = [
         icon: History,
         title: 'Outfit history',
         description:
-            "Track what you've worn and when. OJO uses your history to avoid repeating outfits and surface fresh combinations.",
+            "Track what you've worn and when. OJO avoids repeats, surfaces fresh combinations, and syncs across devices so your history survives a reinstall — share any look in a tap.",
     },
     {
         icon: Plane,
-        title: 'Smart Trip Planner',
+        title: 'TripFit packing plans',
         description:
-            "Heading somewhere? Add your destinations and dates, and OJO suggests what to pack based on the forecast where you're going.",
+            "Heading somewhere? Add a destination and dates, and TripFit builds a day-by-day outfit plan plus a grouped packing list from the forecast where you're going.",
+    },
+    {
+        icon: Navigation,
+        title: 'Trip Mode',
+        description:
+            'Once you arrive, Trip Mode keeps your plan live — re-suggesting outfits on the fly when the local weather throws you a curveball.',
     },
     {
         icon: Bell,
@@ -184,7 +205,9 @@ export default function HomePage() {
                         className='flex flex-col sm:flex-row items-center justify-center gap-3'
                     >
                         <a
-                            href={APP_STORE_URL}
+                            href={TESTFLIGHT_URL}
+                            target='_blank'
+                            rel='noopener noreferrer'
                             className='group flex items-center gap-2 bg-white text-teal-600 font-outfit font-semibold text-sm px-6 py-3.5 rounded-full shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-200'
                         >
                             <svg
@@ -194,7 +217,7 @@ export default function HomePage() {
                             >
                                 <path d='M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z' />
                             </svg>
-                            Coming Soon on App Store
+                            Join the iOS Beta
                         </a>
 
                         <Link

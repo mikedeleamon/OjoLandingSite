@@ -2,7 +2,7 @@
 
 import { useState, useId } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { ChevronDown, Mail, Cloud, Shirt, Lock, FolderOpen, Camera, Trash2, Zap, Plane, Bell } from "lucide-react";
+import { ChevronDown, Mail, Cloud, Shirt, Lock, FolderOpen, Camera, Trash2, Zap, Plane, Bell, BarChart3 } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import { SUPPORT_EMAIL } from "@/lib/constants";
 import type { Metadata } from "next";
@@ -18,7 +18,11 @@ const categories = [
       },
       {
         q: "Do I need to create an account?",
-        a: "Yes, an account is required to save and sync your closets. Your closet data, outfit history, and preferences are stored in the cloud so they're available across devices and restored if you reinstall the app.",
+        a: "Yes, an account is required to save and sync your closets. You can sign up with email and password, or use Sign in with Apple or Google. Your closet data, outfit history, and preferences are stored in the cloud so they're available across devices and restored if you reinstall the app.",
+      },
+      {
+        q: "Does OJO learn my style?",
+        a: "Yes. Every time you log an outfit with \"Wore this today,\" OJO updates a private style profile — your signature colors, go-to fabrics, and favorite categories. The more you log, the more your recommendations shift toward what you actually like. After enough logged outfits the score badge even changes to \"Your Score\" to show suggestions are now personalized to you.",
       },
     ],
   },
@@ -60,15 +64,37 @@ const categories = [
   },
   {
     icon: Plane,
-    label: "Trip Planner",
+    label: "TripFit & Trip Mode",
     faqs: [
       {
-        q: "What is the Smart Trip Planner?",
-        a: "The Smart Trip Planner helps you pack for upcoming travel. Add a trip with its destination and dates, and OJO looks at the forecast where you're going and suggests what to pack from your closet.",
+        q: "What is TripFit?",
+        a: "TripFit is OJO's trip planner. Open it from the ✈️ button below your closet list, type a destination city, and pick your dates on the calendar (up to 10 days). OJO pulls the daily forecast for where you're headed and builds a day-by-day outfit plan plus a grouped packing list — tops, bottoms, outerwear, footwear, and accessories — drawn from your closet.",
       },
       {
-        q: "How do I add a trip?",
-        a: "Open the Trip Planner, tap the + button, and enter your destination city and travel dates. OJO will generate packing suggestions based on the destination's forecast. You can edit or remove a trip at any time.",
+        q: "How do I plan a trip?",
+        a: "From the Closet tab, tap ✈️ TripFit, enter your destination and date range, and choose an occasion (Everyday, Work, Weekend, Date, Outdoor, or Athletic). OJO generates an outfit for each day — swipe between days, tap ↺ to re-plan any single day, and check items off as you pack. You can share the packing list as text from the share button.",
+      },
+      {
+        q: "What is Trip Mode?",
+        a: "Once you've arrived at your destination, Trip Mode keeps your plan live: it watches the local forecast and re-suggests outfits on the fly if the weather changes unexpectedly — so a surprise cold front or rain shower doesn't catch you off guard mid-trip.",
+      },
+    ],
+  },
+  {
+    icon: BarChart3,
+    label: "Wardrobe Insights",
+    faqs: [
+      {
+        q: "What does the Insights tab show?",
+        a: "Insights turns your wardrobe data into a simple dashboard: the share of your closet you've actually worn recently, the cost-per-wear of each item (your best and worst value), your total wardrobe value, your most-worn pieces, and items that are \"sleeping\" — owned but rarely or never worn.",
+      },
+      {
+        q: "How is cost-per-wear calculated?",
+        a: "Cost-per-wear is the price you paid for an item divided by how many times you've worn it. Add a purchase price when you create or edit an article and OJO does the rest — items without a price are simply left out of the cost-per-wear and wardrobe-value figures.",
+      },
+      {
+        q: "What is the donation queue?",
+        a: "When OJO flags an item as \"sleeping,\" you can add it to your donation queue with one tap. The queue is a private list on your device; when you mark an item donated, OJO removes it from your closet. Nothing is shared or posted anywhere.",
       },
     ],
   },

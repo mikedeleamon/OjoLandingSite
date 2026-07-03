@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Mail } from 'lucide-react';
-import { SUPPORT_EMAIL, APP_NAME, FOOTER_LEGAL_LINKS } from '@/lib/constants';
+import { SUPPORT_EMAIL, APP_NAME, FOOTER_LEGAL_LINKS, TESTFLIGHT_URL } from '@/lib/constants';
 
 export default function Footer() {
     const year = new Date().getFullYear();
@@ -26,12 +26,17 @@ export default function Footer() {
                             Your weather-aware outfit companion. Dress smarter,
                             every day.
                         </p>
-                        <div className='mt-4 inline-flex items-center gap-2 glass rounded-full px-3 py-1.5'>
+                        <a
+                            href={TESTFLIGHT_URL}
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            className='mt-4 inline-flex items-center gap-2 glass rounded-full px-3 py-1.5 hover:glass-strong transition-all duration-200'
+                        >
                             <span className='w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse-slow' />
                             <span className='text-white text-xs font-medium'>
-                                Coming soon to App Store
+                                iOS beta now on TestFlight
                             </span>
-                        </div>
+                        </a>
                     </div>
 
                     {/* Legal */}

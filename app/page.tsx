@@ -15,6 +15,9 @@ import {
     Fingerprint,
     BarChart3,
     Bell,
+    LayoutGrid,
+    CalendarCheck,
+    Search,
     ChevronRight,
     Mail,
     ShieldCheck,
@@ -89,7 +92,25 @@ const features = [
         icon: Bell,
         title: 'Daily brief & alerts',
         description:
-            'Wake up to a morning outfit brief, and get a heads-up when the forecast shifts — so you’re never caught underdressed.',
+            'Wake up to a morning outfit brief, and get a heads-up when the forecast shifts, when the day holds a big temperature swing, or when your closet is missing a staple — every alert is yours to switch on or off.',
+    },
+    {
+        icon: LayoutGrid,
+        title: 'Home & lock screen widgets',
+        description:
+            "Today's Outfit, Tomorrow Prep, Layer Timeline, Trip Countdown, and UV & Sunset — five widgets that put the day's call on your home screen. Tap to change your fit without opening the app.",
+    },
+    {
+        icon: CalendarCheck,
+        title: 'Weekly wardrobe recap',
+        description:
+            'Every week OJO hands you a short read on how you actually dressed — your standout colors, the comebacks, and the pieces still sleeping in the back of the closet.',
+    },
+    {
+        icon: Search,
+        title: 'Wardrobe gap detection',
+        description:
+            "OJO notices what your closet is missing for the weather you actually live in — no rain layer, nothing warm enough for next week — and tells you before you're caught out.",
     },
 ];
 

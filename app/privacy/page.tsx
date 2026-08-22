@@ -69,11 +69,13 @@ export default function PrivacyPolicyPage() {
                         When you create an account or use the App, you may
                         provide:
                     </p>
-
-                    <h3>2.2 Information Collected Automatically</h3>
-                    <p>When you use the App, we may automatically collect:</p>
-
                     <ul>
+                        <li>
+                            <strong style={{ color: 'white' }}>
+                                First and last name
+                            </strong>{' '}
+                            — used to personalise your account
+                        </li>
                         <li>
                             <strong style={{ color: 'white' }}>
                                 Email address
@@ -85,16 +87,44 @@ export default function PrivacyPolicyPage() {
                             — a display name of your choosing
                         </li>
                         <li>
+                            <strong style={{ color: 'white' }}>Password</strong>{' '}
+                            — if you sign up with email, your password is stored
+                            only as a salted cryptographic hash. We never store
+                            or have access to it in plain text. If you sign in
+                            with Apple or Google instead, no password is created
+                        </li>
+                        <li>
+                            <strong style={{ color: 'white' }}>
+                                Date of birth
+                            </strong>{' '}
+                            — collected at sign-up to confirm you meet the
+                            minimum age requirement described in Section 9
+                        </li>
+                        <li>
                             <strong style={{ color: 'white' }}>
                                 Location
                             </strong>{' '}
                             — either a city name you enter manually, or, if you
                             choose "My Location," your device's GPS coordinates
-                            read on demand at that moment. Location is used
-                            solely to retrieve local weather for outfit
-                            suggestions; coordinates are sent only for the
-                            weather lookup and are not stored or tracked in the
-                            background
+                            read on demand at that moment. The coordinates for
+                            the location you set are saved to your account so
+                            that scheduled notifications, such as your morning
+                            brief, can retrieve local weather while the App is
+                            closed. If you turn on Trip Mode, the App also reads
+                            your location on demand to detect when you have
+                            arrived at a saved trip destination. We do not track
+                            your location continuously or in the background, and
+                            we do not keep a history of where you have been
+                        </li>
+                        <li>
+                            <strong style={{ color: 'white' }}>
+                                Style preferences
+                            </strong>{' '}
+                            — your clothing style, temperature and humidity
+                            comfort thresholds, unit preferences, any additional
+                            cities you save, and — only if you choose to provide
+                            it — gender, which is used to tailor outfit
+                            suggestions
                         </li>
                         <li>
                             <strong style={{ color: 'white' }}>
@@ -109,15 +139,9 @@ export default function PrivacyPolicyPage() {
                                 Outfit wear history
                             </strong>{' '}
                             — records of which outfit suggestions you marked as
-                            "Wore this today"
-                        </li>
-                        <li>
-                            <strong style={{ color: 'white' }}>
-                                Push notification token
-                            </strong>{' '}
-                            — a device-specific token used solely to deliver
-                            notifications you have enabled (e.g. morning brief,
-                            weather changes)
+                            "Wore this today," and the weather conditions at the
+                            time, which is what allows the App to learn your
+                            preferences
                         </li>
                         <li>
                             <strong style={{ color: 'white' }}>
@@ -127,6 +151,19 @@ export default function PrivacyPolicyPage() {
                             number, travel dates, origin/destination airports,
                             and destination city, plus any outfit plans you
                             build for them
+                        </li>
+                    </ul>
+
+                    <h3>2.2 Information Collected Automatically</h3>
+                    <p>When you use the App, we may automatically collect:</p>
+                    <ul>
+                        <li>
+                            <strong style={{ color: 'white' }}>
+                                Push notification token
+                            </strong>{' '}
+                            — a device-specific token used solely to deliver
+                            notifications you have enabled (e.g. morning brief,
+                            weather changes)
                         </li>
                         <li>
                             <strong style={{ color: 'white' }}>
@@ -145,10 +182,23 @@ export default function PrivacyPolicyPage() {
                     <h3>2.3 Information We Do NOT Collect</h3>
                     <p>
                         We do not collect financial or payment information,
-                        social media profiles, or biometric data of any kind. We
-                        do not track your location in the background or store
-                        your GPS coordinates — see the Location entry above for
-                        how one-time, on-demand location is used.
+                        social media profiles, contacts, or biometric data of
+                        any kind. We do not track your location in the
+                        background, and we do not build an advertising profile
+                        about you — see the Location entry above for exactly how
+                        location is used.
+                    </p>
+
+                    <h3>2.4 Photo Recognition Happens On Your Device</h3>
+                    <p>
+                        When you photograph a garment, the App identifies what
+                        it is — the garment type, its dominant colours, and a
+                        best-guess fabric — using a machine-learning model that
+                        runs entirely on your device. Your photo is not sent to
+                        us or to any third party for that recognition step.
+                        Images are uploaded to our image storage only so your
+                        closet is backed up and available across your devices,
+                        as described in Section 4.
                     </p>
 
                     {/* ── 3. How We Use Your Information ── */}
@@ -158,9 +208,13 @@ export default function PrivacyPolicyPage() {
                         improve the App: account creation and authentication;
                         generating personalised outfit suggestions based on your
                         closet, preferences, and local weather; remembering your
-                        style preferences and outfit history across sessions;
-                        sending notifications you have enabled; powering the
-                        optional trip planner; and diagnosing crashes.
+                        style preferences and outfit history across sessions and
+                        devices; producing your wardrobe insights and weekly
+                        recap; identifying gaps in your closet relative to your
+                        local weather; populating the home-screen and lock-screen
+                        widgets; sending notifications you have enabled; powering
+                        the optional trip planner and Trip Mode; and diagnosing
+                        crashes.
                     </p>
                     <p>
                         We do not use your data for advertising, and we do not
@@ -178,6 +232,20 @@ export default function PrivacyPolicyPage() {
                         that contain no personal information. All data is
                         transmitted over HTTPS/TLS encrypted connections, and
                         access is limited to authorised systems.
+                    </p>
+                    <p>
+                        Passwords are never stored in readable form — only as a
+                        salted bcrypt hash. Authentication tokens are held in
+                        your device's secure storage (iOS Keychain / Android
+                        Keystore).
+                    </p>
+                    <p>
+                        If you add an OJO widget to your home or lock screen, the
+                        App writes a small snapshot — today's outfit, the
+                        forecast, and thumbnail images — into a shared container
+                        on your device so the widget can render without a network
+                        call. That snapshot stays on your device and is removed
+                        when you delete the App.
                     </p>
                     <p>
                         No method of electronic storage or transmission is 100%
@@ -235,6 +303,17 @@ export default function PrivacyPolicyPage() {
                         </li>
                         <li>
                             <strong style={{ color: 'white' }}>
+                                Sign in with Apple (optional)
+                            </strong>{' '}
+                            — if you choose to sign in with Apple, Apple returns
+                            a stable identifier for your account and, on your
+                            first sign-in only, your name and email address. If
+                            you use Apple's "Hide My Email," we receive a private
+                            relay address instead of your real one, and that is
+                            all we ever see.
+                        </li>
+                        <li>
+                            <strong style={{ color: 'white' }}>
                                 Google Sign-In (optional)
                             </strong>{' '}
                             — if you choose to sign in with Google, Google
@@ -243,7 +322,23 @@ export default function PrivacyPolicyPage() {
                             account. We do not request access to your Gmail,
                             contacts, or any other Google data.
                         </li>
+                        <li>
+                            <strong style={{ color: 'white' }}>Resend</strong> —
+                            transactional email provider used to deliver
+                            account emails such as password resets. It receives
+                            your email address and the contents of that message.
+                            We do not send marketing email.
+                        </li>
                     </ul>
+                    <p>
+                        Where the App detects a gap in your wardrobe, it may
+                        offer a "Shop" link. Tapping it opens a Google Shopping
+                        search in your browser for a generic garment description
+                        such as "lightweight rain jacket." No account
+                        information, closet data, or identifier is included in
+                        that search, we receive nothing back from it, and we have
+                        no affiliate relationship with any merchant shown.
+                    </p>
 
                     {/* ── 6. Data Sharing and Disclosure ── */}
                     <h2>6. Data Sharing and Disclosure</h2>
@@ -258,9 +353,10 @@ export default function PrivacyPolicyPage() {
                                 Service providers:
                             </strong>{' '}
                             Third-party vendors (MongoDB Atlas, Cloudflare R2,
-                            Apple WeatherKit, Expo Push, and — if you use
-                            Google Sign-In — Google) acting on our behalf under
-                            their published privacy and security terms.
+                            Apple WeatherKit, Expo Push, Resend, and — if you
+                            sign in with Apple or Google — Apple or Google)
+                            acting on our behalf under their published privacy
+                            and security terms.
                         </li>
                         <li>
                             <strong style={{ color: 'white' }}>
@@ -288,11 +384,20 @@ export default function PrivacyPolicyPage() {
                     <p>
                         We retain your personal information for as long as your
                         account is active. Account data and wardrobe data are
-                        kept until you delete your account. Outfit wear history
-                        is retained for up to{' '}
-                        <strong style={{ color: 'white' }}>12 months</strong>.
-                        When you delete your account, all personally
-                        identifiable data is permanently removed within{' '}
+                        kept until you delete your account. Individual outfit
+                        wear-history entries are automatically deleted{' '}
+                        <strong style={{ color: 'white' }}>
+                            three years
+                        </strong>{' '}
+                        after the date they were recorded — this history is what
+                        lets the App learn your preferences over multiple
+                        seasons. You can clear your wear history at any time
+                        from within the App without deleting your account.
+                    </p>
+                    <p>
+                        When you delete your account, your profile, closets,
+                        wear history, trips, and trip plans are erased
+                        immediately, and any remaining copies are removed within{' '}
                         <strong style={{ color: 'white' }}>30 days</strong>.
                     </p>
 

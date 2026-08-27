@@ -83,15 +83,15 @@ export default function PrivacyPolicyPage() {
                             — used to create and authenticate your account
                         </li>
                         <li>
-                            <strong style={{ color: 'white' }}>Username</strong>{' '}
-                            — a display name of your choosing
-                        </li>
-                        <li>
                             <strong style={{ color: 'white' }}>Password</strong>{' '}
                             — if you sign up with email, your password is stored
                             only as a salted cryptographic hash. We never store
                             or have access to it in plain text. If you sign in
                             with Apple or Google instead, no password is created
+                        </li>
+                        <li>
+                            <strong style={{ color: 'white' }}>Username</strong>{' '}
+                            — a display name of your choosing
                         </li>
                         <li>
                             <strong style={{ color: 'white' }}>
@@ -240,7 +240,7 @@ export default function PrivacyPolicyPage() {
                         Keystore).
                     </p>
                     <p>
-                        If you add an OJO widget to your home or lock screen, the
+                        If you add an Ojo widget to your home or lock screen, the
                         App writes a small snapshot — today's outfit, the
                         forecast, and thumbnail images — into a shared container
                         on your device so the widget can render without a network
@@ -329,7 +329,33 @@ export default function PrivacyPolicyPage() {
                             your email address and the contents of that message.
                             We do not send marketing email.
                         </li>
+                        <li>
+                            <strong style={{ color: 'white' }}>
+                                Open-Meteo
+                            </strong>{' '}
+                            — a free geocoding service used to power the city
+                            search box (e.g. when setting your default city or
+                            planning a trip). It receives the text you type and
+                            returns matching places with their coordinates. It
+                            does not receive your account identifier or any
+                            other information about you.
+                        </li>
+                        <li>
+                            <strong style={{ color: 'white' }}>Sentry</strong> —
+                            error and crash reporting. When the App or our API
+                            hits an error, Sentry receives the error itself,
+                            your device model, OS version, and app version, so
+                            we can find and fix it. We have switched off the
+                            features that would send more than that: it does
+                            not receive your IP address, it does not record
+                            your screen or your session, and it does not
+                            receive your console logs. It never receives your
+                            closet images, your outfit history, or the
+                            contents of your account.
+                        </li>
                     </ul>
+
+                    <h3>5.1 Shopping Links</h3>
                     <p>
                         Where the App detects a gap in your wardrobe, it may
                         offer a "Shop" link. Tapping it opens a Google Shopping
@@ -426,8 +452,25 @@ export default function PrivacyPolicyPage() {
                         The App is not intended for children under the age of 13
                         and complies with the Children's Online Privacy
                         Protection Act (COPPA). We do not knowingly collect
-                        personal information from children under 13. If you
-                        believe your child has provided us information, contact
+                        personal information from children under 13.
+                    </p>
+                    <p>
+                        We ask for your date of birth when you create an
+                        account, and we check it on our servers rather than
+                        only in the app. If you sign in with Apple or Google,
+                        neither service tells us your date of birth, so we ask
+                        you for it directly before the account can be used.
+                        Until we have it, the account cannot store or retrieve
+                        any of your information.
+                    </p>
+                    <p>
+                        If the date of birth given puts you under 13, the
+                        account and everything stored in it are deleted rather
+                        than kept.
+                    </p>
+                    <p>
+                        If you believe a child under 13 has provided us
+                        information under a different date of birth, contact
                         us at{' '}
                         <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>{' '}
                         and we will delete it promptly.

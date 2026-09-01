@@ -5,8 +5,8 @@ import { useState, useEffect, useRef } from 'react';
 // Reads the OS-level prefers-reduced-motion preference once on the client.
 // Returns true when the user has asked for less motion (WCAG 2.3.3).
 function prefersReducedMotion(): boolean {
-  if (typeof window === 'undefined') return false;
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
 // --- Timing ---
@@ -23,21 +23,20 @@ const FADE_MS = 8000; // crossfade duration
 const gradients = [
     // 0  Clear / Sunny  — brand default, always the starting state
     'linear-gradient(160deg, #2DD4BF 0%, #10B981 40%, #A3E635 100%)',
-    // // 1  Partly Cloudy  — sky blue → purple → violet
-    // 'linear-gradient(160deg, #38BDF8 0%, #818CF8 50%, #C084FC 100%)',
-    // // 2  Winter / Snowy — icy sky → cornflower → soft indigo
-    // 'linear-gradient(160deg, #BAE6FD 0%, #60A5FA 50%, #818CF8 100%)',
-    // // 3  Rainy          — cyan → cobalt → indigo
-    // 'linear-gradient(160deg, #22D3EE 0%, #3B82F6 50%, #6366F1 100%)',
-    // // 4  Stormy         — cool slate → dark slate → deep navy
-    // 'linear-gradient(160deg, #64748B 0%, #334155 50%, #1E3A8A 100%)',
-    // // 5  Sunset         — violet → rose → warm peach  (bridges cool→warm)
-    // 'linear-gradient(160deg, #A78BFA 0%, #F472B6 50%, #FDBA74 100%)',
-    // // 6  Hot / Warm     — gold → orange → red
-    // 'linear-gradient(160deg, #FDE047 0%, #F97316 50%, #EF4444 100%)',
-    // // 7  Windy / Breezy — emerald → cyan → soft violet  (bridges warm→Clear)
-    // 'linear-gradient(160deg, #34D399 0%, #22D3EE 50%, #818CF8 100%)',
-
+    // 1  Partly Cloudy  — sky blue → purple → violet
+    'linear-gradient(160deg, #38BDF8 0%, #818CF8 50%, #C084FC 100%)',
+    // 2  Winter / Snowy — icy sky → cornflower → soft indigo
+    'linear-gradient(160deg, #BAE6FD 0%, #60A5FA 50%, #818CF8 100%)',
+    // 3  Rainy          — cyan → cobalt → indigo
+    'linear-gradient(160deg, #22D3EE 0%, #3B82F6 50%, #6366F1 100%)',
+    // 4  Stormy         — cool slate → dark slate → deep navy
+    'linear-gradient(160deg, #64748B 0%, #334155 50%, #1E3A8A 100%)',
+    // 5  Sunset         — violet → rose → warm peach  (bridges cool→warm)
+    'linear-gradient(160deg, #A78BFA 0%, #F472B6 50%, #FDBA74 100%)',
+    // 6  Hot / Warm     — gold → orange → red
+    'linear-gradient(160deg, #FDE047 0%, #F97316 50%, #EF4444 100%)',
+    // 7  Windy / Breezy — emerald → cyan → soft violet  (bridges warm→Clear)
+    'linear-gradient(160deg, #34D399 0%, #22D3EE 50%, #818CF8 100%)',
     // ── Clear / Sun ───────────────────────────────────────────────────────────
     // 9  Clear Day     — sky blue
     'linear-gradient(160deg, #0284C7 0%, #38BDF8 50%, #7DD3FC 100%)',
@@ -76,9 +75,9 @@ const gradients = [
 export default function GradientBackground() {
     const indexRef = useRef(0);
     const [bottom, setBottom] = useState(gradients[0]);
-    const [top, setTop]       = useState(gradients[1]);
+    const [top, setTop] = useState(gradients[1]);
     const [topOpacity, setTopOpacity] = useState(0);
-    const [isFading, setIsFading]     = useState(false);
+    const [isFading, setIsFading] = useState(false);
 
     useEffect(() => {
         // WCAG 2.3.3 — if the user prefers reduced motion, skip all animation
@@ -105,8 +104,9 @@ export default function GradientBackground() {
                 fadeTimer = setTimeout(() => {
                     if (!alive) return;
 
-                    indexRef.current = (indexRef.current + 1) % gradients.length;
-                    const nextIdx    = (indexRef.current + 1) % gradients.length;
+                    indexRef.current =
+                        (indexRef.current + 1) % gradients.length;
+                    const nextIdx = (indexRef.current + 1) % gradients.length;
 
                     setIsFading(false);
                     setTopOpacity(0);
@@ -134,7 +134,10 @@ export default function GradientBackground() {
             aria-hidden='true'
         >
             {/* Bottom layer */}
-            <div className='absolute inset-0' style={{ background: bottom }} />
+            <div
+                className='absolute inset-0'
+                style={{ background: bottom }}
+            />
 
             {/* Top layer — fades in, then swaps instantly */}
             <div
@@ -155,7 +158,10 @@ export default function GradientBackground() {
              * where unaided white text would fail 4.5:1. This scrim brings
              * those stops into compliance without altering the visual design.
              */}
-            <div className='absolute inset-0' style={{ background: 'rgba(0,0,0,0.28)' }} />
+            <div
+                className='absolute inset-0'
+                style={{ background: 'rgba(0,0,0,0.28)' }}
+            />
         </div>
     );
 }

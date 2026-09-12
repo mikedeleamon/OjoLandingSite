@@ -3,42 +3,80 @@
 @tailwind utilities;
 
 :root {
-  --color-mint: #2dd4bf;
-  --color-lime: #a3e635;
-  --color-teal: #10b981;
-  --gradient-main: linear-gradient(160deg, #2dd4bf 0%, #10b981 40%, #a3e635 100%);
+  /* Mirrors lib/tokens.ts, which mirrors the app's src/theme/tokens.ts. */
+  --glass-bg: rgba(255, 255, 255, 0.10);
+  --glass-bg-strong: rgba(255, 255, 255, 0.18);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.22);
+
+  --text-primary: rgba(255, 255, 255, 0.97);
+  --text-secondary: rgba(255, 255, 255, 0.72);
+  --text-muted: rgba(255, 255, 255, 0.66);
+
+  /* The logo's mint→leaf, at the alpha the app tints glass with. Never a fill. */
+  --brand-tint: linear-gradient(135deg, rgba(79, 238, 195, 0.42) 0%, rgba(101, 186, 2, 0.42) 100%);
+
+  /* App: colors.bgDefault — the base the sky is painted over. */
+  --bg-default: #0f172a;
 }
 
 html {
   scroll-behavior: smooth;
-  /* SSR / no-JS fallback — matches gradient index 0 */
-  background: var(--gradient-main);
+  /* SSR / no-JS fallback. The live sky is client-derived (see lib/sky.ts), so
+     the server can't know it; the app's neutral `default` palette stands in and
+     avoids a flash of a colour the app never shows. */
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 50%, #334155 100%);
 }
 
 body {
   min-height: 100vh;
-  font-family: var(--font-dm-sans), sans-serif;
+  /* App: fonts.body */
+  font-family: var(--font-outfit), sans-serif;
+  color: var(--text-secondary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* App: fonts.hero — Fraunces at optical size 72, the display cut. Scoped to the
+   hero the same way the app scopes it to the Home city + temperature. */
+.font-hero {
+  font-variation-settings: 'opsz' 72, 'SOFT' 0, 'WONK' 0;
+  font-weight: 600;
+}
+
 /* Glass card utility */
 .glass {
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--glass-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
 }
 
 .glass-strong {
-  background: rgba(255, 255, 255, 0.18);
+  background: var(--glass-bg-strong);
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
-  border: 1px solid rgba(255, 255, 255, 0.30);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Primary action — the app's own primary-button pair, saveBtnBg / saveBtnText
+   from tokens.ts: a near-white pill with near-black text.
+   
+   The obvious move here was brandHeroTint (the logo's mint→leaf at 42% over
+   glass, which is what the app uses for its hero button). It does not survive
+   the move to the web: that tint assumes the app's always-dark backdrop, and
+   over the site's midday sky the mint end leaves white label text at 2.6:1.
+   saveBtn is dark-on-light, so it passes against any sky the page can show. */
+.btn-primary {
+  background-color: rgba(255, 255, 255, 0.92);
+  color: #0d1b2a;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
 }
 
 .glass-subtle {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--glass-bg-subtle);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -102,17 +140,17 @@ body {
   .animate-float,
   .animate-float-slow,
   .animate-pulse-slow,
-  .animate-gradient-shift {
+  .animate-twinkle {
     animation: none !important;
   }
 }
 
 /* Legal page prose styles */
 .legal-prose h2 {
-  font-family: var(--font-outfit), sans-serif;
+  font-family: var(--font-dm-serif), Georgia, serif;
   font-size: 1.25rem;
   font-weight: 600;
-  color: white;
+  color: var(--text-primary);
   margin-top: 2rem;
   margin-bottom: 0.75rem;
 }
@@ -121,20 +159,20 @@ body {
   font-family: var(--font-outfit), sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  color: rgba(255,255,255,0.9);
+  color: var(--text-primary);
   margin-top: 1.25rem;
   margin-bottom: 0.5rem;
 }
 
 .legal-prose p {
-  color: rgba(255,255,255,0.8);
+  color: var(--text-secondary);
   line-height: 1.75;
   margin-bottom: 1rem;
   font-size: 0.9375rem;
 }
 
 .legal-prose ul {
-  color: rgba(255,255,255,0.8);
+  color: var(--text-secondary);
   list-style-type: disc;
   padding-left: 1.5rem;
   margin-bottom: 1rem;
@@ -147,7 +185,7 @@ body {
 }
 
 .legal-prose a {
-  color: white;
+  color: var(--text-primary);
   text-decoration: underline;
   text-underline-offset: 2px;
 }

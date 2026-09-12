@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Trash2, Clock, ShieldCheck, AlertCircle, CheckCircle } from "lucide-react";
+import { TrashIcon, ClockIcon, ShieldCheckIcon, AlertCircleIcon, CheckCircleIcon } from "@/components/icons";
 import PageHeader from "@/components/PageHeader";
 import { SUPPORT_EMAIL, APP_NAME } from "@/lib/constants";
 
@@ -52,11 +52,11 @@ export default function DeleteAccountPage() {
       <div className="max-w-2xl mx-auto px-6 pb-24 flex flex-col gap-6">
 
         {/* Warning banner */}
-        <div className="glass rounded-2xl p-5 flex items-start gap-4 border border-white/30">
-          <AlertCircle size={20} className="text-white mt-0.5 flex-shrink-0" strokeWidth={1.8} />
+        <div className="glass rounded-md p-5 flex items-start gap-4 border border-white/30">
+          <AlertCircleIcon size={20} className="text-ink-primary mt-0.5 flex-shrink-0" strokeWidth={1.8} />
           <div>
-            <p className="text-white font-outfit font-semibold text-sm mb-1">Permanent action</p>
-            <p className="text-white text-sm font-dm leading-relaxed">
+            <p className="text-ink-primary font-outfit font-semibold text-sm mb-1">Permanent action</p>
+            <p className="text-ink-secondary text-sm leading-relaxed">
               Deleting your account is irreversible. All your closets, outfit
               history, and personal data will be permanently erased within 30 days.
               There is no way to recover this data after deletion.
@@ -65,12 +65,12 @@ export default function DeleteAccountPage() {
         </div>
 
         {/* In-app steps */}
-        <div className="glass rounded-3xl p-7">
+        <div className="glass rounded-lg p-7">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-9 h-9 glass-strong rounded-xl flex items-center justify-center">
-              <Trash2 size={16} className="text-white" strokeWidth={1.8} />
+            <div className="w-9 h-9 glass-strong rounded-sm flex items-center justify-center">
+              <TrashIcon size={16} className="text-ink-primary" strokeWidth={1.8} />
             </div>
-            <h2 className="font-outfit font-semibold text-white text-lg">
+            <h2 className="font-outfit font-semibold text-ink-primary text-lg">
               How to delete your account
             </h2>
           </div>
@@ -80,23 +80,23 @@ export default function DeleteAccountPage() {
               <div key={s.step} className="flex gap-4">
                 <div className="flex flex-col items-center">
                   <div className="w-7 h-7 glass-strong rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-white font-outfit font-bold text-xs">{s.step}</span>
+                    <span className="text-ink-primary font-outfit font-bold text-xs">{s.step}</span>
                   </div>
                   {i < steps.length - 1 && (
                     <div className="w-px flex-1 bg-white/15 mt-2" />
                   )}
                 </div>
                 <div className="pb-5">
-                  <p className="text-white font-outfit font-semibold text-sm mb-1">{s.title}</p>
-                  <p className="text-white text-sm font-dm leading-relaxed">{s.description}</p>
+                  <p className="text-ink-primary font-outfit font-semibold text-sm mb-1">{s.title}</p>
+                  <p className="text-ink-secondary text-sm leading-relaxed">{s.description}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="mt-4 glass-subtle rounded-xl px-4 py-3 flex items-start gap-2.5">
-            <CheckCircle size={15} aria-hidden="true" className="text-white/70 mt-0.5 flex-shrink-0" strokeWidth={1.8} />
-            <p className="text-white text-xs font-dm leading-relaxed">
+          <div className="mt-4 glass-subtle rounded-sm px-4 py-3 flex items-start gap-2.5">
+            <CheckCircleIcon size={15} aria-hidden="true" className="text-ink-muted mt-0.5 flex-shrink-0" strokeWidth={1.8} />
+            <p className="text-ink-muted text-xs leading-relaxed">
               Deleting in-app permanently removes your account and all associated
               data within 30 days. Prefer to delete by email instead? Use the
               method below.
@@ -105,57 +105,57 @@ export default function DeleteAccountPage() {
         </div>
 
         {/* Email method */}
-        <div className="glass rounded-3xl p-7">
+        <div className="glass rounded-lg p-7">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-9 h-9 glass-strong rounded-xl flex items-center justify-center">
-              <ShieldCheck size={16} className="text-white" strokeWidth={1.8} />
+            <div className="w-9 h-9 glass-strong rounded-sm flex items-center justify-center">
+              <ShieldCheckIcon size={16} className="text-ink-primary" strokeWidth={1.8} />
             </div>
-            <h2 className="font-outfit font-semibold text-white text-lg">
+            <h2 className="font-outfit font-semibold text-ink-primary text-lg">
               Request deletion by email
             </h2>
           </div>
-          <p className="text-white text-sm font-dm leading-relaxed mb-5">
+          <p className="text-ink-secondary text-sm leading-relaxed mb-5">
             Send a deletion request from the email address registered to your
             account. Include "Delete My Account" in the subject line. We'll verify
             your identity and process the request within 30 days.
           </p>
           <a
             href={`mailto:${SUPPORT_EMAIL}?subject=Delete%20My%20Account&body=Hi%2C%20I%20would%20like%20to%20permanently%20delete%20my%20OJO%20account%20and%20all%20associated%20data.%0A%0AAccount%20email%3A%20`}
-            className="inline-flex items-center gap-2 bg-white text-teal-600 font-outfit font-semibold text-sm px-5 py-3 rounded-full shadow-md hover:scale-105 hover:shadow-lg transition-all duration-200"
+            className="inline-flex items-center gap-2 btn-primary font-outfit font-semibold text-sm px-5 py-3 rounded-full hover:scale-105 transition-all duration-ojo"
           >
-            <Trash2 size={14} />
+            <TrashIcon size={14} />
             Email deletion request
           </a>
-          <p className="text-white text-xs font-dm mt-4">
+          <p className="text-ink-muted text-xs mt-4">
             Sending from a different email? Include your registered email address
             in the message body so we can locate your account.
           </p>
         </div>
 
         {/* What gets deleted */}
-        <div className="glass rounded-3xl p-7">
+        <div className="glass rounded-lg p-7">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-9 h-9 glass-strong rounded-xl flex items-center justify-center">
-              <Clock size={16} className="text-white" strokeWidth={1.8} />
+            <div className="w-9 h-9 glass-strong rounded-sm flex items-center justify-center">
+              <ClockIcon size={16} className="text-ink-primary" strokeWidth={1.8} />
             </div>
-            <h2 className="font-outfit font-semibold text-white text-lg">
+            <h2 className="font-outfit font-semibold text-ink-primary text-lg">
               What gets deleted
             </h2>
           </div>
-          <p className="text-white text-sm font-dm leading-relaxed mb-5">
+          <p className="text-ink-secondary text-sm leading-relaxed mb-5">
             Once your request is confirmed, the following data will be permanently
-            deleted from our systems within <strong className="text-white">30 days</strong>:
+            deleted from our systems within <strong className="text-ink-primary">30 days</strong>:
           </p>
           <ul className="flex flex-col gap-2.5">
             {deletedItems.map((item) => (
               <li key={item} className="flex items-start gap-3">
-                <CheckCircle size={15} aria-hidden="true" className="text-white/60 mt-0.5 flex-shrink-0" strokeWidth={1.8} />
-                <span className="text-white text-sm font-dm">{item}</span>
+                <CheckCircleIcon size={15} aria-hidden="true" className="text-ink-muted mt-0.5 flex-shrink-0" strokeWidth={1.8} />
+                <span className="text-ink-secondary text-sm">{item}</span>
               </li>
             ))}
           </ul>
-          <div className="mt-5 glass-subtle rounded-xl px-4 py-3">
-            <p className="text-white text-xs font-dm leading-relaxed">
+          <div className="mt-5 glass-subtle rounded-sm px-4 py-3">
+            <p className="text-ink-muted text-xs leading-relaxed">
               Some anonymized, aggregated analytics data not linked to your
               identity may be retained after deletion for product improvement
               purposes.

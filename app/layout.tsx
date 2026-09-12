@@ -1,22 +1,36 @@
 import type { Metadata } from 'next';
-import { Outfit, DM_Sans } from 'next/font/google';
+import { Outfit, DM_Serif_Display, Fraunces } from 'next/font/google';
 import './globals.css';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import GradientBackground from '@/components/GradientBackground';
 
+// The app's three faces, from src/theme/tokens.ts:
+//   fonts.hero    → Fraunces SemiBold, optical size 72 (the Home hero only)
+//   fonts.display → DM Serif Display (section titles)
+//   fonts.body    → Outfit 300–700 (everything else)
+// The site previously paired Outfit with DM Sans, which is a different family
+// from DM Serif Display and appears nowhere in the app.
+
+const fraunces = Fraunces({
+    subsets: ['latin'],
+    variable: '--font-fraunces',
+    display: 'swap',
+    axes: ['SOFT', 'WONK', 'opsz'],
+});
+
+const dmSerif = DM_Serif_Display({
+    subsets: ['latin'],
+    variable: '--font-dm-serif',
+    display: 'swap',
+    weight: ['400'],
+});
+
 const outfit = Outfit({
     subsets: ['latin'],
     variable: '--font-outfit',
     display: 'swap',
-    weight: ['300', '400', '500', '600', '700', '800'],
-});
-
-const dmSans = DM_Sans({
-    subsets: ['latin'],
-    variable: '--font-dm-sans',
-    display: 'swap',
-    weight: ['300', '400', '500', '600'],
+    weight: ['300', '400', '500', '600', '700'],
 });
 
 export const metadata: Metadata = {
@@ -82,7 +96,7 @@ export default function RootLayout({
     return (
         <html
             lang='en'
-            className={`${outfit.variable} ${dmSans.variable}`}
+            className={`${outfit.variable} ${dmSerif.variable} ${fraunces.variable}`}
         >
             <body className='min-h-screen relative overflow-x-hidden'>
                 {/* ── Skip navigation (WCAG 2.4.1 / Section 508 §1194.22(o)) ── */}

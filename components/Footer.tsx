@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Mail } from 'lucide-react';
+import { MailIcon } from '@/components/icons';
 import { SUPPORT_EMAIL, APP_NAME, FOOTER_LEGAL_LINKS, TESTFLIGHT_URL } from '@/lib/constants';
 
 export default function Footer() {
     const year = new Date().getFullYear();
 
     return (
-        <footer className='glass-subtle border-t border-white/15 mt-24'>
+        <footer className='glass-subtle border-t border-glass-border mt-24'>
             <div className='max-w-5xl mx-auto px-6 py-12'>
                 <div className='grid grid-cols-1 md:grid-cols-3 gap-10 mb-10'>
                     {/* Brand */}
@@ -18,11 +18,11 @@ export default function Footer() {
                                 alt='OJO'
                                 width={28}
                                 height={28}
-                                className='rounded-xl'
+                                className='rounded-sm'
                             />
-                            <span className='font-outfit font-semibold text-white text-base'></span>
+                            <span className='font-outfit font-semibold text-ink-primary text-base'></span>
                         </div>
-                        <p className='text-white text-sm leading-relaxed'>
+                        <p className='text-ink-secondary text-sm leading-relaxed'>
                             Your weather-aware outfit companion. Dress smarter,
                             every day.
                         </p>
@@ -30,10 +30,10 @@ export default function Footer() {
                             href={TESTFLIGHT_URL}
                             target='_blank'
                             rel='noopener noreferrer'
-                            className='mt-4 inline-flex items-center gap-2 glass rounded-full px-3 py-1.5 hover:glass-strong transition-all duration-200'
+                            className='mt-4 inline-flex items-center gap-2 glass rounded-full px-3 py-1.5 hover:glass-strong transition-all duration-ojo'
                         >
                             <span className='w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse-slow' />
-                            <span className='text-white text-xs font-medium'>
+                            <span className='text-ink-muted text-xs font-medium'>
                                 iOS beta now on TestFlight
                             </span>
                         </a>
@@ -41,7 +41,7 @@ export default function Footer() {
 
                     {/* Legal */}
                     <div>
-                        <p className='text-white text-xs font-semibold uppercase tracking-widest mb-3'>
+                        <p className='text-ink-primary text-xs font-semibold uppercase tracking-widest mb-3'>
                             Legal
                         </p>
                         <ul
@@ -52,7 +52,7 @@ export default function Footer() {
                                 <li key={link.href}>
                                     <Link
                                         href={link.href}
-                                        className='text-white text-sm hover:text-white/80 transition-colors'
+                                        className='text-ink-secondary text-sm hover:text-ink-primary transition-colors'
                                     >
                                         {link.label}
                                     </Link>
@@ -63,20 +63,20 @@ export default function Footer() {
 
                     {/* Contact */}
                     <div>
-                        <p className='text-white text-xs font-semibold uppercase tracking-widest mb-3'>
+                        <p className='text-ink-primary text-xs font-semibold uppercase tracking-widest mb-3'>
                             Contact
                         </p>
                         <a
                             href={`mailto:${SUPPORT_EMAIL}`}
-                            className='flex items-center gap-2 text-white text-sm hover:text-white/80 transition-colors group'
+                            className='flex items-center gap-2 text-ink-secondary text-sm hover:text-ink-primary transition-colors group'
                         >
-                            <Mail
+                            <MailIcon
                                 size={14}
                                 className='group-hover:scale-110 transition-transform'
                             />
                             {SUPPORT_EMAIL}
                         </a>
-                        <p className='text-white text-xs mt-3 leading-relaxed'>
+                        <p className='text-ink-muted text-xs mt-3 leading-relaxed'>
                             We typically respond within 24–48 hours on business
                             days.
                         </p>
@@ -84,11 +84,11 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom bar */}
-                <div className='border-t border-white/15 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2'>
-                    <p className='text-white text-xs'>
+                <div className='border-t border-glass-border pt-6 flex flex-col sm:flex-row items-center justify-between gap-2'>
+                    <p className='text-ink-muted text-xs'>
                         © {year} {APP_NAME}. All rights reserved.
                     </p>
-                    <p className='text-white text-xs'>
+                    <p className='text-ink-muted text-xs'>
                         Built with <span aria-hidden='true'>☀</span> somewhere
                         in the farms.
                     </p>

@@ -17,7 +17,7 @@ export default function TermsPage() {
       />
 
       <div className="max-w-3xl mx-auto px-6 pb-24">
-        <div className="glass rounded-3xl p-8 md:p-10 legal-prose">
+        <div className="glass rounded-lg p-8 md:p-10 legal-prose">
 
           <p>
             <strong style={{ color: "white" }}>Effective Date:</strong>{" "}

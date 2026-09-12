@@ -2,14 +2,14 @@
 
 import { useState, useId } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { ChevronDown, Mail, Cloud, Shirt, Lock, FolderOpen, Camera, Trash2, Zap, Plane, Bell, BarChart3 } from "lucide-react";
+import { ChevronDownIcon, MailIcon, CloudIcon, HangerIcon, LockIcon, FolderIcon, CameraIcon, TrashIcon, ZapIcon, SuitcaseIcon, BellIcon, BarsIcon } from "@/components/icons";
 import PageHeader from "@/components/PageHeader";
 import { SUPPORT_EMAIL } from "@/lib/constants";
 import type { Metadata } from "next";
 
 const categories = [
   {
-    icon: Zap,
+    icon: ZapIcon,
     label: "Getting Started",
     faqs: [
       {
@@ -27,7 +27,7 @@ const categories = [
     ],
   },
   {
-    icon: Cloud,
+    icon: CloudIcon,
     label: "Weather",
     faqs: [
       {
@@ -45,7 +45,7 @@ const categories = [
     ],
   },
   {
-    icon: FolderOpen,
+    icon: FolderIcon,
     label: "Closets",
     faqs: [
       {
@@ -63,7 +63,7 @@ const categories = [
     ],
   },
   {
-    icon: Plane,
+    icon: SuitcaseIcon,
     label: "TripFit & Trip Mode",
     faqs: [
       {
@@ -81,7 +81,7 @@ const categories = [
     ],
   },
   {
-    icon: BarChart3,
+    icon: BarsIcon,
     label: "Wardrobe Insights",
     faqs: [
       {
@@ -99,7 +99,7 @@ const categories = [
     ],
   },
   {
-    icon: Bell,
+    icon: BellIcon,
     label: "Notifications",
     faqs: [
       {
@@ -113,7 +113,7 @@ const categories = [
     ],
   },
   {
-    icon: Camera,
+    icon: CameraIcon,
     label: "Photos",
     faqs: [
       {
@@ -127,7 +127,7 @@ const categories = [
     ],
   },
   {
-    icon: Lock,
+    icon: LockIcon,
     label: "Account & Security",
     faqs: [
       {
@@ -145,7 +145,7 @@ const categories = [
     ],
   },
   {
-    icon: Trash2,
+    icon: TrashIcon,
     label: "Account Deletion",
     faqs: [
       {
@@ -176,12 +176,12 @@ function FaqItem({ q, a }: { q: string; a: string }) {
         aria-expanded={open}
         aria-controls={answerId}
       >
-        <span className="text-white font-dm font-medium text-sm leading-relaxed group-hover:text-white/90 transition-colors">
+        <span className="text-ink-primary font-medium text-sm leading-relaxed group-hover:text-ink-primary transition-colors">
           {q}
         </span>
-        <ChevronDown
+        <ChevronDownIcon
           size={16}
-          className={`text-white/50 flex-shrink-0 mt-0.5 transition-transform duration-300 ${
+          className={`text-ink-muted flex-shrink-0 mt-0.5 transition-transform duration-ojo ${
             open ? "rotate-180" : ""
           }`}
           strokeWidth={1.8}
@@ -200,7 +200,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >
-            <p className="text-white text-sm font-dm leading-relaxed pb-4">{a}</p>
+            <p className="text-ink-secondary text-sm leading-relaxed pb-4">{a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -223,12 +223,12 @@ export default function SupportPage() {
         {categories.map((cat) => {
           const Icon = cat.icon;
           return (
-            <div key={cat.label} className="glass rounded-3xl p-6">
+            <div key={cat.label} className="glass rounded-lg p-6">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 glass-strong rounded-xl flex items-center justify-center">
-                  <Icon size={15} className="text-white" strokeWidth={1.8} />
+                <div className="w-8 h-8 glass-strong rounded-sm flex items-center justify-center">
+                  <Icon size={15} className="text-ink-primary" strokeWidth={1.8} />
                 </div>
-                <h2 className="font-outfit font-semibold text-white">{cat.label}</h2>
+                <h2 className="font-outfit font-semibold text-ink-primary">{cat.label}</h2>
               </div>
               <div>
                 {cat.faqs.map((faq) => (
@@ -240,26 +240,26 @@ export default function SupportPage() {
         })}
 
         {/* Contact section */}
-        <div className="glass-strong rounded-3xl p-7 text-center">
-          <div className="w-11 h-11 glass rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <Mail size={18} className="text-white" strokeWidth={1.8} />
+        <div className="glass-strong rounded-lg p-7 text-center">
+          <div className="w-11 h-11 glass rounded-md flex items-center justify-center mx-auto mb-4">
+            <MailIcon size={18} className="text-ink-primary" strokeWidth={1.8} />
           </div>
-          <h2 className="font-outfit font-bold text-white text-xl mb-2">
+          <h2 className="font-display text-ink-primary text-xl mb-2">
             Still need help?
           </h2>
-          <p className="text-white text-sm font-dm leading-relaxed mb-5 max-w-sm mx-auto">
+          <p className="text-ink-primary text-sm leading-relaxed mb-5 max-w-sm mx-auto">
             Send us a message and we'll get back to you within 24–48 hours on
             business days. Include your device model and iOS version for faster
             support.
           </p>
           <a
             href={`mailto:${SUPPORT_EMAIL}?subject=OJO%20Support%20Request`}
-            className="inline-flex items-center gap-2 bg-white text-teal-600 font-outfit font-semibold text-sm px-6 py-3.5 rounded-full shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-200"
+            className="inline-flex items-center gap-2 btn-primary font-outfit font-semibold text-sm px-6 py-3.5 rounded-full hover:scale-105 transition-all duration-ojo"
           >
-            <Mail size={14} />
+            <MailIcon size={14} />
             {SUPPORT_EMAIL}
           </a>
-          <p className="text-white text-xs font-dm mt-4">
+          <p className="text-ink-muted text-xs mt-4">
             Response time: 24–48 business hours
           </p>
         </div>

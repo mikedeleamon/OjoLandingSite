@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { MenuIcon, CloseIcon } from '@/components/icons';
 import { APP_NAME, NAV_LINKS } from '@/lib/constants';
 
 export default function Nav() {
@@ -25,7 +25,7 @@ export default function Nav() {
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-                scrolled ? 'glass-strong shadow-sm' : 'bg-transparent'
+                scrolled ? 'glass' : 'bg-transparent'
             }`}
         >
             <nav
@@ -45,7 +45,7 @@ export default function Nav() {
                         height={40}
                         className='group-hover:scale-105 transition-transform'
                     />
-                    <span className='font-outfit font-semibold text-white text-lg tracking-tight'></span>
+                    <span className='font-outfit font-semibold text-ink-primary text-lg tracking-tight'></span>
                 </Link>
 
                 {/* Desktop links */}
@@ -59,10 +59,10 @@ export default function Nav() {
                             <li key={link.href}>
                                 <Link
                                     href={link.href}
-                                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-ojo ${
                                         active
-                                            ? 'glass text-white'
-                                            : 'text-white hover:glass'
+                                            ? 'glass text-ink-primary'
+                                            : 'text-ink-secondary hover:glass'
                                     }`}
                                 >
                                     {link.label}
@@ -74,13 +74,13 @@ export default function Nav() {
 
                 {/* Mobile menu toggle */}
                 <button
-                    className='md:hidden glass rounded-full p-2 text-white min-w-[44px] min-h-[44px] flex items-center justify-center'
+                    className='md:hidden glass rounded-full p-2 text-ink-primary min-w-[44px] min-h-[44px] flex items-center justify-center'
                     onClick={() => setOpen((v) => !v)}
                     aria-label={open ? 'Close menu' : 'Open menu'}
                     aria-expanded={open}
                     aria-controls="mobile-nav-menu"
                 >
-                    {open ? <X size={18} /> : <Menu size={18} />}
+                    {open ? <CloseIcon size={18} /> : <MenuIcon size={18} />}
                 </button>
             </nav>
 
@@ -88,7 +88,7 @@ export default function Nav() {
             {open && (
                 <div
                     id="mobile-nav-menu"
-                    className='md:hidden glass-strong border-t border-white/20 px-6 py-4'
+                    className='md:hidden glass-strong border-t border-glass-border px-6 py-4'
                     role="navigation"
                     aria-label="Mobile navigation"
                 >
@@ -102,10 +102,10 @@ export default function Nav() {
                                 <li key={link.href}>
                                     <Link
                                         href={link.href}
-                                        className={`block px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                                        className={`block px-4 py-2.5 rounded-sm text-sm font-medium transition-all ${
                                             active
-                                                ? 'glass text-white'
-                                                : 'text-white hover:glass'
+                                                ? 'glass text-ink-primary'
+                                                : 'text-ink-secondary hover:glass'
                                         }`}
                                     >
                                         {link.label}

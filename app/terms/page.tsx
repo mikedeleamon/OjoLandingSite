@@ -40,8 +40,8 @@ export default function TermsPage() {
           {/* ── 2. Description of the Service ── */}
           <h2>2. Description of the Service</h2>
           <p>
-            Ojo is a free mobile wardrobe management application. It allows you
-            to create and manage a digital wardrobe, receive outfit suggestions
+            Ojo is a mobile wardrobe management application. It allows you to
+            create and manage a digital wardrobe, receive outfit suggestions
             generated from your wardrobe and local weather conditions, and track
             your outfit wear history. Garment recognition from photos you take
             runs on your device using an on-device machine learning model.
@@ -54,10 +54,42 @@ export default function TermsPage() {
             over time.
           </p>
           <p>
-            The App is provided free of charge with no paid features,
-            subscriptions, or in-app purchases. We reserve the right to modify,
-            suspend, or discontinue any part of the App at any time without
-            liability.
+            The App's core features are free to use. Ojo Pro is an optional
+            auto-renewing subscription described in Section 2.1. We reserve the
+            right to modify, suspend, or discontinue any part of the App at any
+            time without liability.
+          </p>
+
+          <h3>2.1 Ojo Pro Subscription</h3>
+          <p>
+            Ojo Pro is an optional, auto-renewing subscription that unlocks
+            additional features, including saving more than one trip at a time
+            in the Trip Planner and deeper wardrobe insights (Style DNA). The
+            core outfit-suggestion, closet, and weather features described above
+            remain free whether or not you subscribe.
+          </p>
+          <p>
+            Subscription length and price are shown in the App and in your Apple
+            App Store or Google Play account settings before you purchase, and
+            may vary by promotion or region. Payment is charged to your Apple ID
+            or Google Play account at confirmation of purchase.
+          </p>
+          <p>
+            Your subscription automatically renews for the same length and price
+            unless you cancel at least 24 hours before the end of the current
+            period. Your account will be charged for renewal within 24 hours
+            before the end of the current period. You can manage or cancel your
+            subscription at any time in your Apple App Store or Google Play
+            account settings — we cannot process a cancellation or refund on
+            your behalf.
+          </p>
+          <p>
+            Where a free trial or introductory offer is shown, any unused
+            portion is forfeited if you purchase a subscription before the trial
+            ends. Purchases and subscriptions are processed entirely by Apple or
+            Google; we never receive your payment card details — see Section 5
+            of our <a href="/privacy">Privacy Policy</a> for what our
+            subscription-management provider, RevenueCat, does receive.
           </p>
 
           {/* ── 3. Eligibility ── */}
@@ -192,8 +224,8 @@ export default function TermsPage() {
             FROM YOUR USE OF THE APP.
           </p>
           <p>
-            In no event shall our total liability exceed $100 (as the App is
-            currently free).
+            In no event shall our total liability exceed the greater of $100 or
+            the amount you paid us in the twelve months preceding the claim.
           </p>
 
           {/* ── 11. Indemnification ── */}

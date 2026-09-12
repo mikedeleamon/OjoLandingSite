@@ -353,6 +353,19 @@ export default function PrivacyPolicyPage() {
                             closet images, your outfit history, or the
                             contents of your account.
                         </li>
+                        <li>
+                            <strong style={{ color: 'white' }}>
+                                RevenueCat
+                            </strong>{' '}
+                            — manages in-app purchases and subscription status
+                            for Ojo Pro. It receives your purchase and
+                            subscription history and the same account identifier
+                            used elsewhere in the App, so your subscription stays
+                            in sync across your devices. RevenueCat does not
+                            receive your payment card details — those are handled
+                            entirely by Apple's or Google's own purchase system
+                            and never pass through our servers or RevenueCat.
+                        </li>
                     </ul>
 
                     <h3>5.1 Shopping Links</h3>

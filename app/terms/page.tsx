@@ -63,10 +63,19 @@ export default function TermsPage() {
           <h3>2.1 Ojo Pro Subscription</h3>
           <p>
             Ojo Pro is an optional, auto-renewing subscription that unlocks
-            additional features, including saving more than one trip at a time
-            in the Trip Planner and deeper wardrobe insights (Style DNA). The
-            core outfit-suggestion, closet, and weather features described above
-            remain free whether or not you subscribe.
+            additional features, including adding clothing items and closets
+            beyond the limits that apply to a free account, saving more than one
+            trip at a time in the Trip Planner, and deeper wardrobe insights
+            (Style DNA). The current limits for free accounts are shown in the
+            App.
+          </p>
+          <p>
+            The daily outfit-suggestion and weather features described above
+            remain free whether or not you subscribe, and are not limited by the
+            number of items in your closet. If a free account holds more items
+            or closets than a limit allows — because the limit changed, or
+            because a subscription ended — it keeps everything already added and
+            those items continue to work normally; only adding more is affected.
           </p>
           <p>
             Subscription length and price are shown in the App and in your Apple

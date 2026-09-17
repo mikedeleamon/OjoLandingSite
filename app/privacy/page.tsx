@@ -95,13 +95,6 @@ export default function PrivacyPolicyPage() {
                         </li>
                         <li>
                             <strong style={{ color: 'white' }}>
-                                Date of birth
-                            </strong>{' '}
-                            — collected at sign-up to confirm you meet the
-                            minimum age requirement described in Section 9
-                        </li>
-                        <li>
-                            <strong style={{ color: 'white' }}>
                                 Location
                             </strong>{' '}
                             — either a city name you enter manually, or, if you
@@ -468,23 +461,15 @@ export default function PrivacyPolicyPage() {
                         personal information from children under 13.
                     </p>
                     <p>
-                        We ask for your date of birth when you create an
-                        account, and we check it on our servers rather than
-                        only in the app. If you sign in with Apple or Google,
-                        neither service tells us your date of birth, so we ask
-                        you for it directly before the account can be used.
-                        Until we have it, the account cannot store or retrieve
-                        any of your information.
+                        You must be at least 13 years old to create an account,
+                        as set out in our Terms of Service. We do not ask for
+                        your date of birth.
                     </p>
                     <p>
-                        If the date of birth given puts you under 13, the
-                        account and everything stored in it are deleted rather
-                        than kept.
-                    </p>
-                    <p>
-                        If you believe a child under 13 has provided us
-                        information under a different date of birth, contact
-                        us at{' '}
+                        If we learn that an account belongs to a child under
+                        13, we will delete the account and everything stored in
+                        it. If you believe a child under 13 has provided us
+                        information, contact us at{' '}
                         <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>{' '}
                         and we will delete it promptly.
                     </p>

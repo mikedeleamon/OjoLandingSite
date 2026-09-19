@@ -98,16 +98,22 @@ export default function PrivacyPolicyPage() {
                                 Location
                             </strong>{' '}
                             — either a city name you enter manually, or, if you
-                            choose "My Location," your device's GPS coordinates
-                            read on demand at that moment. The coordinates for
-                            the location you set are saved to your account so
-                            that scheduled notifications, such as your morning
-                            brief, can retrieve local weather while the App is
-                            closed. If you turn on Trip Mode, the App also reads
-                            your location on demand to detect when you have
-                            arrived at a saved trip destination. We do not track
-                            your location continuously or in the background, and
-                            we do not keep a history of where you have been
+                            choose "My Location," your device's location read on
+                            demand at that moment. Before your location leaves
+                            your device, the App rounds it to about 1 km (two
+                            decimal places of latitude and longitude); your
+                            precise position never reaches our servers. The
+                            rounded coordinates for the location you set are
+                            saved to your account so that scheduled
+                            notifications, such as your morning brief, can
+                            retrieve local weather while the App is closed. If
+                            you turn on Trip Mode, the App also reads your
+                            location on demand to detect when you have arrived at
+                            a saved trip destination; that check happens on your
+                            device, and only which trip you are on is sent to us.
+                            We do not track your location continuously or in the
+                            background, and we do not keep a history of where you
+                            have been
                         </li>
                         <li>
                             <strong style={{ color: 'white' }}>

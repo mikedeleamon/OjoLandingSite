@@ -142,6 +142,9 @@ export default function PrivacyPolicyPage() {
                             time, which is what allows the App to learn your
                             preferences
                         </li>
+                        {/* Parked until airline-trip import ships — the App
+                            doesn't collect airline, confirmation number, or
+                            airports yet. Original wording:
                         <li>
                             <strong style={{ color: 'white' }}>
                                 Trip information (optional)
@@ -150,6 +153,14 @@ export default function PrivacyPolicyPage() {
                             number, travel dates, origin/destination airports,
                             and destination city, plus any outfit plans you
                             build for them
+                        </li> */}
+                        <li>
+                            <strong style={{ color: 'white' }}>
+                                Trip information (optional)
+                            </strong>{' '}
+                            — for trips you add, the destination city, travel
+                            dates, and an optional trip name, plus the outfit
+                            plans and packing lists you build for them
                         </li>
                     </ul>
 

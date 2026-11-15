@@ -3,7 +3,7 @@ import PageHeader from '@/components/PageHeader';
 import {
     SUPPORT_EMAIL,
     APP_NAME,
-    EFFECTIVE_DATE,
+    PRIVACY_EFFECTIVE_DATE,
     COMPANY_NAME,
     WEBSITE_URL,
 } from '@/lib/constants';
@@ -28,7 +28,7 @@ export default function PrivacyPolicyPage() {
                         <strong style={{ color: 'white' }}>
                             Effective Date:
                         </strong>{' '}
-                        {EFFECTIVE_DATE}
+                        {PRIVACY_EFFECTIVE_DATE}
                     </p>
 
                     {/* ── 1. Introduction ── */}
@@ -102,18 +102,35 @@ export default function PrivacyPolicyPage() {
                             demand at that moment. Before your location leaves
                             your device, the App rounds it to about 1 km (two
                             decimal places of latitude and longitude); your
-                            precise position never reaches our servers. The
-                            rounded coordinates for the location you set are
-                            saved to your account so that scheduled
-                            notifications, such as your morning brief, can
-                            retrieve local weather while the App is closed. If
-                            you turn on Trip Mode, the App also reads your
-                            location on demand to detect when you have arrived at
-                            a saved trip destination; that check happens on your
-                            device, and only which trip you are on is sent to us.
-                            We do not track your location continuously or in the
-                            background, and we do not keep a history of where you
-                            have been
+                            precise position never reaches our servers. The most
+                            recent rounded location is saved to your account so
+                            that scheduled notifications, such as your morning
+                            brief, can retrieve local weather while the App is
+                            closed; we keep only the latest one. If you turn on
+                            Trip Mode, the App also reads your location on demand
+                            to detect when you have arrived at a saved trip
+                            destination; that check happens on your device, and
+                            only which trip you are on is sent to us. We do not
+                            track your location continuously, and we do not keep
+                            a history of where you have been
+                        </li>
+                        <li>
+                            <strong style={{ color: 'white' }}>
+                                Background location (optional, off unless you
+                                turn it on)
+                            </strong>{' '}
+                            — if you allow "Always" location access from the
+                            App's notification settings, iOS wakes the App when
+                            your device moves roughly 8 km (5 miles) from where
+                            it last was, and the App may also refresh in the
+                            background from time to time. Each time, the App
+                            reads your location once, updates your widgets,
+                            morning brief and weather alerts for where you are,
+                            and sends us the same rounded (about 1 km) location
+                            described above, replacing the previous one. It does
+                            not follow your movements continuously. You can turn
+                            it off at any time by setting the App's location
+                            access to "While Using" in your device settings
                         </li>
                         <li>
                             <strong style={{ color: 'white' }}>
@@ -193,10 +210,11 @@ export default function PrivacyPolicyPage() {
                     <p>
                         We do not collect financial or payment information,
                         social media profiles, contacts, or biometric data of
-                        any kind. We do not track your location in the
-                        background, and we do not build an advertising profile
-                        about you — see the Location entry above for exactly how
-                        location is used.
+                        any kind. We do not track your location continuously,
+                        background location is used only if you turn it on, and
+                        we do not build an advertising profile about you — see
+                        the Location and Background location entries above for
+                        exactly how location is used.
                     </p>
 
                     <h3>2.4 Photo Recognition Happens On Your Device</h3>

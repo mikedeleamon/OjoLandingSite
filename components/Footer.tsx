@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { MailIcon } from '@/components/icons';
-import { SUPPORT_EMAIL, APP_NAME, FOOTER_LEGAL_LINKS, TESTFLIGHT_URL } from '@/lib/constants';
+import { SUPPORT_EMAIL, APP_NAME, FOOTER_LEGAL_LINKS, APP_STORE_URL } from '@/lib/constants';
 
 export default function Footer() {
     const year = new Date().getFullYear();
@@ -27,14 +27,14 @@ export default function Footer() {
                             every day.
                         </p>
                         <a
-                            href={TESTFLIGHT_URL}
+                            href={APP_STORE_URL}
                             target='_blank'
                             rel='noopener noreferrer'
                             className='mt-4 inline-flex items-center gap-2 glass rounded-full px-3 py-1.5 hover:glass-strong transition-all duration-ojo'
                         >
                             <span className='w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse-slow' />
                             <span className='text-ink-muted text-xs font-medium'>
-                                iOS beta now on TestFlight
+                                Now on the App Store
                             </span>
                         </a>
                     </div>

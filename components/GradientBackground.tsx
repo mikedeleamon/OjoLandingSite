@@ -43,7 +43,7 @@ const alphaOf = (rgba: string) =>
 // Every place white text meets the sky, as (text tier, glass in the way). The
 // scrim has to satisfy all of them, so it is solved for each and the darkest
 // answer wins. Glass alphas compound where surfaces nest — a nav pill is a 0.10
-// glass inside the 0.10 header once scrolled, and the footer's TestFlight pill
+// glass inside the 0.10 header once scrolled, and the footer's App Store pill
 // is a 0.10 inside the 0.06 footer — which is exactly the case a single
 // hand-picked number kept missing.
 const P = alphaOf(textTokens.primary);

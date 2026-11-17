@@ -7,8 +7,7 @@ export const COMPANY_NAME = "Ojo Studio, LLC";
 export const EFFECTIVE_DATE = "September 23, 2026";
 /** Privacy Policy only: background location wording added for app 1.2.0. */
 export const PRIVACY_EFFECTIVE_DATE = "November 14, 2026";
-export const TESTFLIGHT_URL = "https://testflight.apple.com/join/JeSe98NQ"; // iOS beta
-export const APP_STORE_URL = "#"; // Public App Store URL — set when out of beta
+export const APP_STORE_URL = "https://apps.apple.com/us/app/ojo-outfit-forecast/id6775698216";
 export const WEBSITE_URL = "https://ojoapp.io";
 
 export const NAV_LINKS = [

@@ -26,7 +26,7 @@ import {
     HeadphonesIcon,
     AppleGlyph,
 } from '@/components/icons';
-import { SUPPORT_EMAIL, TESTFLIGHT_URL } from '@/lib/constants';
+import { SUPPORT_EMAIL, APP_STORE_URL } from '@/lib/constants';
 
 const features = [
     {
@@ -227,13 +227,13 @@ export default function HomePage() {
                         className='flex flex-col sm:flex-row items-center justify-center gap-3'
                     >
                         <a
-                            href={TESTFLIGHT_URL}
+                            href={APP_STORE_URL}
                             target='_blank'
                             rel='noopener noreferrer'
                             className='group flex items-center gap-2 btn-primary font-outfit font-semibold text-sm px-6 py-3.5 rounded-full hover:scale-105 transition-all duration-ojo'
                         >
                             <AppleGlyph size={16} />
-                            Join the iOS Beta
+                            Download on the App Store
                         </a>
 
                         <Link

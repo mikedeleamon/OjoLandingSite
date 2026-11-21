@@ -1,11 +1,12 @@
-"use client";
-
-import { useState, useId } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { ChevronDownIcon, MailIcon, CloudIcon, HangerIcon, LockIcon, FolderIcon, CameraIcon, TrashIcon, ZapIcon, SuitcaseIcon, BellIcon, BarsIcon } from "@/components/icons";
+import type { Metadata } from "next";
+import { ChevronDownIcon, MailIcon, CloudIcon, LockIcon, FolderIcon, CameraIcon, TrashIcon, ZapIcon, SuitcaseIcon, BellIcon, BarsIcon, MicIcon, SparkleIcon } from "@/components/icons";
 import PageHeader from "@/components/PageHeader";
 import { SUPPORT_EMAIL } from "@/lib/constants";
-import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Support",
+  description: "Answers to common questions about OJO, plus how to reach us.",
+};
 
 const categories = [
   {
@@ -14,7 +15,7 @@ const categories = [
     faqs: [
       {
         q: "How do outfit suggestions work?",
-        a: "OJO reads your local weather forecast — including temperature, feels-like temperature, humidity, and wind — and cross-references it against the clothing articles in your active closet. It then scores each article's suitability for the conditions and assembles a recommended outfit. On days with wide temperature swings, OJO's Layering Intelligence Engine also tells you which layers you can shed mid-day and when.",
+        a: "OJO reads your local weather forecast — including temperature, feels-like temperature, humidity, and wind — and cross-references it against the pieces in your active closet. It then scores each piece's suitability for the conditions and assembles a recommended outfit. On days with wide temperature swings, OJO's Layering Intelligence Engine also tells you which layers you can shed mid-day and when.",
       },
       {
         q: "Do I need to create an account?",
@@ -23,6 +24,14 @@ const categories = [
       {
         q: "Does OJO learn my style?",
         a: "Yes. Every time you log an outfit with \"Wore this today,\" OJO updates a private style profile — your signature colors, go-to fabrics, and favorite categories. The more you log, the more your recommendations shift toward what you actually like. After enough logged outfits the score badge even changes to \"Your Score\" to show suggestions are now personalized to you.",
+      },
+      {
+        q: "Can I swap out a piece I don't like?",
+        a: "Yes. Long-press any piece on the outfit card and OJO offers up to three stand-ins that still score well for today's weather. Pieces you swap away from teach OJO what you don't want, so future suggestions get closer to your taste.",
+      },
+      {
+        q: "What is the Wear Calendar?",
+        a: "Every time you tap \"Wore this today,\" the outfit is added to your Wear Calendar. It shows your current streak, a 26-week strip in the colors you wore, and month-by-month grids of outfit collages — tap any day to see what you wore. It replaces the old text-only history list.",
       },
     ],
   },
@@ -58,7 +67,7 @@ const categories = [
       },
       {
         q: "What clothing types does OJO recognize?",
-        a: "OJO supports shirts, t-shirts, pants, jeans, shorts, jackets, coats, hoodies, sweaters, dresses, skirts, and shoes. When adding an article, you can also specify fabric type (cotton, wool, synthetic, etc.) and color — both improve suggestion accuracy.",
+        a: "OJO supports shirts, t-shirts, pants, jeans, shorts, jackets, coats, hoodies, sweaters, dresses, skirts, and shoes. When adding a piece, you can also specify fabric type (cotton, wool, synthetic, etc.) and color — both improve suggestion accuracy.",
       },
     ],
   },
@@ -90,7 +99,7 @@ const categories = [
       },
       {
         q: "How is cost-per-wear calculated?",
-        a: "Cost-per-wear is the price you paid for an item divided by how many times you've worn it. Add a purchase price when you create or edit an article and OJO does the rest — items without a price are simply left out of the cost-per-wear and wardrobe-value figures.",
+        a: "Cost-per-wear is the price you paid for an item divided by how many times you've worn it. Add a purchase price when you create or edit a piece and OJO does the rest — items without a price are simply left out of the cost-per-wear and wardrobe-value figures.",
       },
       {
         q: "What is the donation queue?",
@@ -107,8 +116,48 @@ const categories = [
         a: "OJO can send a morning outfit brief with the day's recommendation, and alerts when the forecast for your city changes significantly. You choose which notifications to enable — OJO never sends marketing messages.",
       },
       {
+        q: "Can notifications follow me when I travel?",
+        a: "Yes, if you choose. By default your morning brief, widgets, and alerts describe wherever you last opened OJO. If you allow \"Always\" location access, OJO updates them for where you are — iOS wakes the app when you've moved roughly 5 miles (8 km), and OJO reads your location once, rounded to about 1 km, rather than tracking you continuously. You can turn this off any time by setting OJO's location access to \"While Using\" in your device Settings.",
+      },
+      {
         q: "How do I turn notifications on or off?",
         a: "Go to Settings → Notifications inside OJO to toggle the morning brief and weather alerts individually. You can also manage OJO's notification permission in your device's Settings → Notifications → OJO.",
+      },
+    ],
+  },
+  {
+    icon: MicIcon,
+    label: "Siri, Shortcuts & Widgets",
+    faqs: [
+      {
+        q: "How do I ask Siri what to wear?",
+        a: "Say \"What should I wear in Ojo\" or \"Ask Ojo what to wear\" to Siri, search for it in Spotlight, or add the action in the Shortcuts app. For tomorrow, say \"What should I wear tomorrow in Ojo.\" Siri speaks the answer and shows a card with photos of your pieces — the app doesn't open. It works on iOS 17 and later and is free for everyone.",
+      },
+      {
+        q: "Siri says to open OJO instead of answering.",
+        a: "Siri answers from the same snapshot your widgets use, so OJO needs to have refreshed at least once recently. Open OJO once to refresh it, then ask again. If your closet is empty, Siri gives the same weather advice you see on the Home screen.",
+      },
+      {
+        q: "Which widgets does OJO have?",
+        a: "Five: Today's Outfit, Tomorrow Prep, Layer Timeline, Trip Countdown, and UV & Sunset. Add them from your home screen or lock screen, and tap to change your fit without opening the app.",
+      },
+    ],
+  },
+  {
+    icon: SparkleIcon,
+    label: "Ojo Pro",
+    faqs: [
+      {
+        q: "What does Ojo Pro include?",
+        a: "Ojo Pro is an optional subscription that lifts the free limits on pieces and closets, lets you save more than one trip at a time in TripFit, and unlocks Style DNA — your named style profile with generative art and a shareable poster. Daily outfit suggestions and weather are always free.",
+      },
+      {
+        q: "What happens if I'm over a free limit, or my subscription ends?",
+        a: "Nothing is removed. An account over a limit keeps everything it already has, and it all keeps working — you just can't add more until you're back under the limit or subscribe again.",
+      },
+      {
+        q: "How do I cancel or restore my subscription?",
+        a: "Subscriptions are managed by Apple, so cancel in your device's Settings → [your name] → Subscriptions; we can't cancel or refund on your behalf. If you've already subscribed and Pro isn't showing, open the upgrade screen in OJO and tap Restore purchases.",
       },
     ],
   },
@@ -118,7 +167,7 @@ const categories = [
     faqs: [
       {
         q: "How do I upload clothing photos?",
-        a: "When adding a clothing article, tap the image placeholder to open your photo library or take a new photo with your camera. OJO will need photo library and camera permissions for this — you can grant them in Settings → Privacy on your device.",
+        a: "When adding a piece, tap the image placeholder to open your photo library or take a new photo with your camera. OJO will need photo library and camera permissions for this — you can grant them in Settings → Privacy on your device.",
       },
       {
         q: "Are my photos stored securely?",
@@ -154,57 +203,30 @@ const categories = [
       },
       {
         q: "What happens to my data when I delete my account?",
-        a: "All your personal data — email, closets, clothing articles, outfit history, photos, and preferences — is permanently deleted from our systems within 30 days of your confirmed deletion request. This action cannot be undone.",
+        a: "All your personal data — email, closets, clothing pieces, outfit history, photos, and preferences — is permanently deleted from our systems within 30 days of your confirmed deletion request. This action cannot be undone.",
       },
     ],
   },
 ];
 
+// Native <details>: keyboard- and screen-reader-accessible disclosure with no
+// client JavaScript, so this whole page renders on the server.
 function FaqItem({ q, a }: { q: string; a: string }) {
-  const [open, setOpen] = useState(false);
-  // useId generates a stable, unique id per instance — required to link
-  // aria-controls on the button to the id on the answer region (WCAG 1.3.1).
-  const uid      = useId();
-  const answerId = `faq-answer-${uid.replace(/:/g, '')}`;
-  const shouldReduce = useReducedMotion();
-
   return (
-    <div className="border-b border-white/10 last:border-0">
-      <button
-        onClick={() => setOpen((v) => !v)}
-        className="w-full flex items-start justify-between gap-4 py-4 min-h-[44px] text-left group"
-        aria-expanded={open}
-        aria-controls={answerId}
-      >
-        <span className="text-ink-primary font-medium text-sm leading-relaxed group-hover:text-ink-primary transition-colors">
+    <details className="group border-b border-white/10 last:border-0">
+      <summary className="list-none [&::-webkit-details-marker]:hidden cursor-pointer w-full flex items-start justify-between gap-4 py-4 min-h-[44px] text-left">
+        <span className="text-ink-primary font-medium text-sm leading-relaxed">
           {q}
         </span>
         <ChevronDownIcon
           size={16}
-          className={`text-ink-muted flex-shrink-0 mt-0.5 transition-transform duration-ojo ${
-            open ? "rotate-180" : ""
-          }`}
+          className="text-ink-muted flex-shrink-0 mt-0.5 transition-transform duration-ojo group-open:rotate-180"
           strokeWidth={1.8}
           aria-hidden="true"
         />
-      </button>
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            id={answerId}
-            role="region"
-            aria-label={q}
-            initial={shouldReduce ? false : { height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={shouldReduce ? undefined : { height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden"
-          >
-            <p className="text-ink-secondary text-sm leading-relaxed pb-4">{a}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+      </summary>
+      <p className="text-ink-secondary text-sm leading-relaxed pb-4">{a}</p>
+    </details>
   );
 }
 

@@ -100,10 +100,6 @@ const lerpColor = (from: string, to: string, t: number): string => {
 
 // ─── Solar position (NOAA equations) ──────────────────────────────────────────
 
-const rad = (d: number) => (d * Math.PI) / 180;
-const deg = (r: number) => (r * 180) / Math.PI;
-const julianDay = (date: Date) => date.getTime() / 86_400_000 + 2_440_587.5;
-
 export interface SolarPosition {
     /** Degrees above the horizon. Negative = below. */
     elevationDeg: number;
@@ -112,8 +108,16 @@ export interface SolarPosition {
     isRising: boolean;
 }
 
+/**
+ * Self-contained on purpose — no references outside its own body — because
+ * lib/skyBoot inlines its source into the page <head> to paint the live sky
+ * before any bundle loads. Keep helpers inside it.
+ */
 export function solarPosition(lat: number, lon: number, date = new Date()): SolarPosition {
-    const t = (julianDay(date) - 2_451_545.0) / 36_525;
+    const rad = (d: number) => (d * Math.PI) / 180;
+    const deg = (r: number) => (r * 180) / Math.PI;
+    const julianDay = date.getTime() / 86_400_000 + 2_440_587.5;
+    const t = (julianDay - 2_451_545.0) / 36_525;
 
     const l0 = (280.46646 + t * (36_000.76983 + t * 0.0003032)) % 360;
     const m = 357.52911 + t * (35_999.05029 - 0.0001537 * t);
@@ -216,7 +220,7 @@ export function skyGradientFor(elevationDeg: number, isRising = false): readonly
  * phase seasonally, though still correct to within an hour or so at the
  * equinoxes. Swap this for a real coordinate the day the site has one.
  */
-const ASSUMED_LATITUDE = 40;
+export const ASSUMED_LATITUDE = 40;
 
 /** Longitude implied by the browser's UTC offset — 15° of longitude per hour. */
 function longitudeFromTimezone(date = new Date()): number {
@@ -248,7 +252,10 @@ export function liveSky(date = new Date()): LiveSky {
         date,
     );
     return {
-        stops: skyGradientFor(elevationDeg, isRising),
+        // Whole degrees — the same rounding lib/skyBoot's pre-paint table uses,
+        // so the sky doesn't shift when the client takes over. A degree of sun
+        // is four to six minutes of real sky.
+        stops: skyGradientFor(Math.round(elevationDeg), isRising),
         elevationDeg,
         isRising,
         isNight: elevationDeg < NIGHT_ELEVATION,

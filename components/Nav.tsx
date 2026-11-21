@@ -45,7 +45,6 @@ export default function Nav() {
                         height={40}
                         className='group-hover:scale-105 transition-transform'
                     />
-                    <span className='font-outfit font-semibold text-ink-primary text-lg tracking-tight'></span>
                 </Link>
 
                 {/* Desktop links */}

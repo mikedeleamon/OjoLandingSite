@@ -13,9 +13,6 @@
   --text-secondary: rgba(255, 255, 255, 0.72);
   --text-muted: rgba(255, 255, 255, 0.66);
 
-  /* The logo's mint→leaf, at the alpha the app tints glass with. Never a fill. */
-  --brand-tint: linear-gradient(135deg, rgba(79, 238, 195, 0.42) 0%, rgba(101, 186, 2, 0.42) 100%);
-
   /* App: colors.bgDefault — the base the sky is painted over. */
   --bg-default: #0f172a;
 }
@@ -87,22 +84,20 @@ body {
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.12);
 }
 
-/* Gradient text */
-.text-gradient {
-  background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.75) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Scroll reveal — see components/Reveal. Absent attribute = visible, so SSR and
+   no-JS render everything. */
+/* Slide only, never fade: opacity < 1 on an ancestor makes it a backdrop root,
+   so a fading glass card loses its blur and reads as an empty frame until the
+   fade ends. Transform doesn't, and the content is never invisible. */
+[data-reveal='pending'] {
+  transform: translateY(24px);
 }
-
-/* Noise overlay for subtle texture */
-.noise::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 0;
+[data-reveal='done'] {
+  transform: none;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+[data-reveal='instant'] {
+  transform: none;
 }
 
 /* Scrollbar */
@@ -140,7 +135,8 @@ body {
   .animate-float,
   .animate-float-slow,
   .animate-pulse-slow,
-  .animate-twinkle {
+  .animate-twinkle,
+  .animate-rise {
     animation: none !important;
   }
 }

@@ -20,7 +20,6 @@ export default function Footer() {
                                 height={28}
                                 className='rounded-sm'
                             />
-                            <span className='font-outfit font-semibold text-ink-primary text-base'></span>
                         </div>
                         <p className='text-ink-secondary text-sm leading-relaxed'>
                             Your weather-aware outfit companion. Dress smarter,

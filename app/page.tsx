@@ -1,8 +1,7 @@
-'use client';
-
 import Image from 'next/image';
-import { motion, MotionConfig } from 'framer-motion';
 import Link from 'next/link';
+import { Fraunces } from 'next/font/google';
+import Reveal from '@/components/Reveal';
 import {
     SparkleIcon,
     CloudIcon,
@@ -10,8 +9,9 @@ import {
     LayersIcon,
     FingerprintIcon,
     BarsIcon,
-    FolderIcon,
     HistoryIcon,
+    MicIcon,
+    SwapIcon,
     SuitcaseIcon,
     PinIcon,
     BellIcon,
@@ -28,24 +28,46 @@ import {
 } from '@/components/icons';
 import { SUPPORT_EMAIL, APP_STORE_URL } from '@/lib/constants';
 
+// App: fonts.hero — Fraunces SemiBold at optical size 72, for the hero heading
+// only. Loaded here rather than in the root layout so only Home preloads it.
+// SOFT and WONK stay at their default 0, so only the opsz axis ships.
+const fraunces = Fraunces({
+    subsets: ['latin'],
+    variable: '--font-fraunces',
+    display: 'swap',
+    axes: ['opsz'],
+});
+
 const features = [
     {
         icon: SparkleIcon,
         title: 'Smart outfit suggestions',
         description:
-            "OJO scores every outfit across fabric, color harmony, formality, and your personal style, then matches it to today's forecast — temperature, feels-like, humidity, wind — using clothes you actually own. Switch occasions (Work, Date, Outdoor) and it re-ranks instantly.",
+            "OJO scores every outfit across fabric, color harmony, formality, and your personal style, then matches it to today's forecast — temperature, feels-like, humidity, wind — using pieces you actually own. Switch occasions (Work, Date, Outdoor) and it re-ranks instantly.",
+    },
+    {
+        icon: SwapIcon,
+        title: 'Swap any piece',
+        description:
+            "Not feeling the shirt? Long-press any piece on the outfit card and OJO offers up to three stand-ins that still score well for today's weather — and learns from the ones you pass on.",
     },
     {
         icon: CloudIcon,
-        title: 'Live weather integration',
+        title: 'Weather you can see',
         description:
-            "Powered by Apple WeatherKit's real-time data. OJO knows when the morning is cold but the afternoon warms up, and layers accordingly.",
+            "Powered by Apple WeatherKit. OJO knows when the morning is cold but the afternoon warms up, and layers accordingly — and the outfit card itself reacts to the sky: rain beads on the glass, frost creeps in from the corners, heat shimmers above 90°.",
+    },
+    {
+        icon: MicIcon,
+        title: 'Ask Siri what to wear',
+        description:
+            "Say \"What should I wear in Ojo\" to Siri, Spotlight, or Shortcuts — or ask for tomorrow's outfit. Siri answers out loud with a card of your pieces, without opening the app. Free for everyone.",
     },
     {
         icon: HangerIcon,
         title: 'Your closet, organized',
         description:
-            "Add clothing by type, color, and fabric — or just snap a photo and OJO's on-device ML identifies the garment. Your images never leave your phone during recognition.",
+            "Add pieces by type, color, and fabric — or just snap a photo and OJO's on-device ML identifies the garment. Your images never leave your phone during recognition. Keep separate closets for seasons, travel, or work; Ojo Pro lifts the free limits on pieces and closets.",
     },
     {
         icon: LayersIcon,
@@ -55,27 +77,21 @@ const features = [
     },
     {
         icon: FingerprintIcon,
-        title: 'Style that learns you',
+        title: 'Style DNA',
         description:
-            'The more outfits you log, the sharper OJO gets. It builds a Style DNA — your signature colors and go-to fabrics — and shifts recommendations toward what is genuinely you.',
+            'The more outfits you log, the sharper OJO gets. Your Style DNA gets a name read from what you wear and generative art built from your colors — a living portrait of your style you can share. Part of Ojo Pro.',
     },
     {
         icon: BarsIcon,
         title: 'Wardrobe Insights',
         description:
-            "See how much of your closet you actually wear, cost-per-wear for every item, your total wardrobe value, and which pieces are 'sleeping' — then queue them for donation in a tap.",
-    },
-    {
-        icon: FolderIcon,
-        title: 'Multiple closets',
-        description:
-            'Seasonal wardrobes, travel packing, work vs. weekend — keep them separated and switch your preferred closet anytime.',
+            "See how much of your closet you actually wear, cost-per-wear for every piece, your total wardrobe value, and which pieces are 'sleeping' — then queue them for donation in a tap.",
     },
     {
         icon: HistoryIcon,
-        title: 'Outfit history',
+        title: 'Wear Calendar',
         description:
-            "Track what you've worn and when. OJO avoids repeats, surfaces fresh combinations, and syncs across devices so your history survives a reinstall — share any look in a tap.",
+            "Every outfit you log lands on your Wear Calendar: your streaks, a 26-week strip in the colors you wore, and month grids of outfit collages. Tap any day to see exactly what you had on. It syncs across devices, so your history survives a reinstall.",
     },
     {
         icon: SuitcaseIcon,
@@ -93,7 +109,7 @@ const features = [
         icon: BellIcon,
         title: 'Daily brief & alerts',
         description:
-            'Wake up to a morning outfit brief, and get a heads-up when the forecast shifts, when the day holds a big temperature swing, or when your closet is missing a staple — every alert is yours to switch on or off.',
+            'Wake up to a morning outfit brief, and get a heads-up when the forecast shifts, when the day holds a big temperature swing, or when your closet is missing a staple. Allow optional "Always" location and they follow you when you travel — every alert is yours to switch on or off.',
     },
     {
         icon: WidgetIcon,
@@ -142,89 +158,48 @@ const legalLinks = [
     },
 ];
 
-// Animation variants
-const containerVariants = {
-    hidden: {},
-    visible: { transition: { staggerChildren: 0.1 } },
-};
-
-const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-    },
-};
-
 export default function HomePage() {
     return (
-        // MotionConfig reducedMotion="user" — Framer Motion automatically
-        // jumps all animated values to their target state instantly when the
-        // OS-level prefers-reduced-motion preference is set (WCAG 2.3.3).
-        <MotionConfig reducedMotion="user">
-        <div className='min-h-screen'>
-            {/* ── HERO ── */}
+        <div className={`min-h-screen ${fraunces.variable}`}>
+            {/* ── HERO ── entrance is CSS (animate-rise), so no JS is needed to
+                paint it, and prefers-reduced-motion switches it off. */}
             <section className='relative pt-36 pb-24 px-6 overflow-hidden'>
                 <div className='max-w-4xl mx-auto text-center'>
                     {/* App icon / logo */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                        className='flex justify-center mb-8'
-                    >
+                    <div className='flex justify-center mb-8 animate-rise'>
                         <Image
-                            src='/ojo_app_icon@1x.png'
+                            src='/ojo_app_icon@512.png'
                             alt='OJO App Icon'
                             width={96}
                             height={96}
                             className='rounded-lg shadow-xl animate-float'
                             priority
                         />
-                    </motion.div>
+                    </div>
 
                     {/* Headline */}
-                    <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                            duration: 0.75,
-                            delay: 0.15,
-                            ease: [0.22, 1, 0.36, 1],
-                        }}
-                        className='font-hero text-5xl md:text-7xl text-ink-primary text-shadow leading-[1.05] mb-6'
+                    <h1
+                        className='animate-rise font-hero text-5xl md:text-7xl text-ink-primary text-shadow leading-[1.05] mb-6'
+                        style={{ animationDelay: '0.1s' }}
                     >
                         Dress for
                         <br />
                         the weather.
-                    </motion.h1>
+                    </h1>
 
                     {/* Subheadline */}
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                            duration: 0.7,
-                            delay: 0.3,
-                            ease: [0.22, 1, 0.36, 1],
-                        }}
-                        className='text-ink-secondary text-lg md:text-xl leading-relaxed max-w-xl mx-auto mb-10'
+                    <p
+                        className='animate-rise text-ink-secondary text-lg md:text-xl leading-relaxed max-w-xl mx-auto mb-10'
+                        style={{ animationDelay: '0.2s' }}
                     >
                         OJO reads the forecast, knows your wardrobe, and tells
                         you exactly what to wear — every single day.
-                    </motion.p>
+                    </p>
 
                     {/* CTAs */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 16 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                            duration: 0.6,
-                            delay: 0.45,
-                            ease: [0.22, 1, 0.36, 1],
-                        }}
-                        className='flex flex-col sm:flex-row items-center justify-center gap-3'
+                    <div
+                        className='animate-rise flex flex-col sm:flex-row items-center justify-center gap-3'
+                        style={{ animationDelay: '0.3s' }}
                     >
                         <a
                             href={APP_STORE_URL}
@@ -243,18 +218,12 @@ export default function HomePage() {
                             <MailIcon size={15} />
                             Contact Support
                         </Link>
-                    </motion.div>
+                    </div>
 
                     {/* App preview */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                            duration: 0.9,
-                            delay: 0.6,
-                            ease: [0.22, 1, 0.36, 1],
-                        }}
-                        className='mt-20 flex justify-center'
+                    <div
+                        className='animate-rise mt-20 flex justify-center'
+                        style={{ animationDelay: '0.4s' }}
                     >
                         <div className='relative'>
                             <Image
@@ -262,10 +231,9 @@ export default function HomePage() {
                                 alt='OJO app preview'
                                 width={320}
                                 height={640}
-                                className='w-64 md:w-80 h-auto rounded-[44px] '
-                                style={{
-                                    backgroundClip: 'padding-box',
-                                }}
+                                sizes='(min-width: 768px) 320px, 256px'
+                                priority
+                                className='w-64 md:w-80 h-auto rounded-[44px]'
                             />
 
                             {/* Decorative glow behind phone */}
@@ -277,7 +245,7 @@ export default function HomePage() {
                                 }}
                             />
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
             </section>
 
@@ -287,13 +255,7 @@ export default function HomePage() {
                 aria-labelledby='features-heading'
             >
                 <div className='max-w-5xl mx-auto'>
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                        className='text-center mb-14'
-                    >
+                    <Reveal className='text-center mb-14'>
                         <p className='text-ink-primary text-xs font-semibold uppercase tracking-widest font-outfit mb-3'>
                             What OJO does
                         </p>
@@ -303,44 +265,35 @@ export default function HomePage() {
                         >
                             Your wardrobe, weather-aware.
                         </h2>
-                    </motion.div>
+                    </Reveal>
 
-                    <motion.div
-                        variants={containerVariants}
-                        initial='hidden'
-                        whileInView='visible'
-                        viewport={{ once: true, margin: '-60px' }}
-                        className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5'
-                    >
-                        {features.map((feature) => {
+                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5'>
+                        {features.map((feature, i) => {
                             const Icon = feature.icon;
                             return (
-                                <motion.div
+                                <Reveal
                                     key={feature.title}
-                                    variants={itemVariants}
-                                    whileHover={{
-                                        y: -4,
-                                        transition: { duration: 0.2 },
-                                    }}
-                                    className='glass rounded-lg p-6 cursor-default group'
+                                    delay={(i % 3) * 100}
                                 >
-                                    <div className='w-10 h-10 rounded-md glass-strong flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-ojo'>
-                                        <Icon
-                                            size={18}
-                                            className='text-ink-primary'
-                                            strokeWidth={1.8}
-                                        />
+                                    <div className='glass rounded-lg p-6 cursor-default group h-full transition-transform duration-200 hover:-translate-y-1'>
+                                        <div className='w-10 h-10 rounded-md glass-strong flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-ojo'>
+                                            <Icon
+                                                size={18}
+                                                className='text-ink-primary'
+                                                strokeWidth={1.8}
+                                            />
+                                        </div>
+                                        <h3 className='font-outfit font-semibold text-ink-primary text-base mb-2'>
+                                            {feature.title}
+                                        </h3>
+                                        <p className='text-ink-secondary text-sm leading-relaxed'>
+                                            {feature.description}
+                                        </p>
                                     </div>
-                                    <h3 className='font-outfit font-semibold text-ink-primary text-base mb-2'>
-                                        {feature.title}
-                                    </h3>
-                                    <p className='text-ink-secondary text-sm leading-relaxed'>
-                                        {feature.description}
-                                    </p>
-                                </motion.div>
+                                </Reveal>
                             );
                         })}
-                    </motion.div>
+                    </div>
                 </div>
             </section>
 
@@ -350,13 +303,7 @@ export default function HomePage() {
                 aria-labelledby='legal-heading'
             >
                 <div className='max-w-3xl mx-auto'>
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                        className='text-center mb-10'
-                    >
+                    <Reveal className='text-center mb-10'>
                         <h2
                             id='legal-heading'
                             className='font-display text-2xl md:text-3xl text-ink-primary text-shadow mb-2'
@@ -367,21 +314,15 @@ export default function HomePage() {
                             Everything you need to know about your data and how
                             to get help.
                         </p>
-                    </motion.div>
+                    </Reveal>
 
-                    <motion.div
-                        variants={containerVariants}
-                        initial='hidden'
-                        whileInView='visible'
-                        viewport={{ once: true, margin: '-40px' }}
-                        className='grid grid-cols-1 sm:grid-cols-2 gap-4'
-                    >
-                        {legalLinks.map((link) => {
+                    <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+                        {legalLinks.map((link, i) => {
                             const Icon = link.icon;
                             return (
-                                <motion.div
+                                <Reveal
                                     key={link.href}
-                                    variants={itemVariants}
+                                    delay={(i % 2) * 100}
                                 >
                                     <Link
                                         href={link.href}
@@ -404,26 +345,20 @@ export default function HomePage() {
                                         </div>
                                         <ChevronRightIcon
                                             size={16}
-                                            aria-hidden="true"
+                                            aria-hidden='true'
                                             className='text-ink-muted group-hover:text-ink-secondary group-hover:translate-x-0.5 transition-all duration-ojo flex-shrink-0'
                                         />
                                     </Link>
-                                </motion.div>
+                                </Reveal>
                             );
                         })}
-                    </motion.div>
+                    </div>
                 </div>
             </section>
 
             {/* ── CONTACT CTA ── */}
             <section className='px-6 pb-24'>
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                    className='max-w-2xl mx-auto glass-strong rounded-lg p-8 md:p-10 text-center'
-                >
+                <Reveal className='max-w-2xl mx-auto glass-strong rounded-lg p-8 md:p-10 text-center'>
                     <p className='text-ink-primary text-xs font-semibold uppercase tracking-widest font-outfit mb-3'>
                         Questions?
                     </p>
@@ -441,9 +376,8 @@ export default function HomePage() {
                         <MailIcon size={15} />
                         {SUPPORT_EMAIL}
                     </a>
-                </motion.div>
+                </Reveal>
             </section>
         </div>
-        </MotionConfig>
     );
 }

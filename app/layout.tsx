@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
-import { Outfit, DM_Serif_Display, Fraunces } from 'next/font/google';
+import { Outfit, DM_Serif_Display } from 'next/font/google';
 import './globals.css';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import GradientBackground from '@/components/GradientBackground';
+import { APP_DESCRIPTION } from '@/lib/constants';
+import { SKY_BOOT_SCRIPT } from '@/lib/skyBoot';
 
 // The app's three faces, from src/theme/tokens.ts:
 //   fonts.hero    → Fraunces SemiBold, optical size 72 (the Home hero only)
@@ -12,12 +14,8 @@ import GradientBackground from '@/components/GradientBackground';
 // The site previously paired Outfit with DM Sans, which is a different family
 // from DM Serif Display and appears nowhere in the app.
 
-const fraunces = Fraunces({
-    subsets: ['latin'],
-    variable: '--font-fraunces',
-    display: 'swap',
-    axes: ['SOFT', 'WONK', 'opsz'],
-});
+// fonts.hero (Fraunces) is loaded by app/page.tsx — the Home hero is its only
+// use, so the other pages don't download or preload it.
 
 const dmSerif = DM_Serif_Display({
     subsets: ['latin'],
@@ -30,7 +28,6 @@ const outfit = Outfit({
     subsets: ['latin'],
     variable: '--font-outfit',
     display: 'swap',
-    weight: ['300', '400', '500', '600', '700'],
 });
 
 export const metadata: Metadata = {
@@ -38,8 +35,7 @@ export const metadata: Metadata = {
         default: 'OJO — Dress for the weather.',
         template: '%s | OJO',
     },
-    description:
-        'OJO is your weather-aware outfit companion. It reads the forecast, knows your wardrobe, and tells you exactly what to wear — every single day.',
+    description: APP_DESCRIPTION,
     keywords: [
         'outfit planner',
         'weather app',
@@ -76,10 +72,10 @@ export const metadata: Metadata = {
         images: ['/og-image.png'],
     },
     icons: {
-        icon: [{ url: '/ojo_app_icon@1x.png' }],
+        icon: [{ url: '/favicon-32.png', sizes: '32x32', type: 'image/png' }],
         apple: [
             {
-                url: '/ojo_app_icon@1x.png',
+                url: '/apple-touch-icon.png',
                 sizes: '180x180',
                 type: 'image/png',
             },
@@ -96,8 +92,15 @@ export default function RootLayout({
     return (
         <html
             lang='en'
-            className={`${outfit.variable} ${dmSerif.variable} ${fraunces.variable}`}
+            className={`${outfit.variable} ${dmSerif.variable}`}
+            // The sky boot script sets CSS variables on <html> before React
+            // hydrates; that style attribute is expected, not a mismatch.
+            suppressHydrationWarning
         >
+            <head>
+                {/* Live sky before first paint — see lib/skyBoot. */}
+                <script dangerouslySetInnerHTML={{ __html: SKY_BOOT_SCRIPT }} />
+            </head>
             <body className='min-h-screen relative overflow-x-hidden'>
                 {/* ── Skip navigation (WCAG 2.4.1 / Section 508 §1194.22(o)) ── */}
                 <a

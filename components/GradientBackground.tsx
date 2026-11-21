@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect, useMemo, useRef } from 'react';
-import { weatherGradients, toCss, text as textTokens } from '@/lib/tokens';
+import { weatherGradients, toCss } from '@/lib/tokens';
 import { liveSky } from '@/lib/sky';
-import { scrimRampFor, type ScrimStop } from '@/lib/contrast';
+import { scrimFor, mergeRamps, scrollRamp, toCssScrim } from '@/lib/scrim';
 import StarField from './StarField';
 
 type Palette = readonly string[];
@@ -23,61 +23,21 @@ const REST_MS = 5500; // the live sky holds longer — it's the resting state
 // most of the cycle on a real palette rather than between two.
 const FADE_MS = 4000; // crossfade duration
 
-// --- Scrim ---
-// The app dims its backdrop as you scroll into content (BackdropLayer's
-// MIN_DIM / SCROLL_RANGE) so glass tiles and body copy sit over a settled sky
-// rather than a bright horizon. The site does the same, and has a second reason
-// to: its palettes run from #020617 to #E0F2FE, and white text over the pale
-// end needs help to clear 4.5:1 (WCAG 1.4.3).
-//
-// So the two ends of the ramp are solved per palette rather than picked (see
-// lib/contrast). SCRIM_FLOOR is the value used when the sky is already dark
-// enough to need nothing — every night palette lands here, which is why they
-// still read as vividly as they do on device.
-const SCRIM_FLOOR = 0.28;
+// --- Scrim --- (see lib/scrim) — scroll distance over which it deepens.
 const SCROLL_RANGE = 420;
 
-const alphaOf = (rgba: string) =>
-    Number(rgba.split(',')[3]?.replace(')', '') ?? 1);
+// Before the first crossfade the layers read CSS variables that lib/skyBoot's
+// <head> script set before first paint, so the live sky is on screen without
+// waiting for this bundle. If that script ever fails, the sky falls back to the
+// app's dark `default` palette, which needs no scrim for white text.
+const BOOT_SKY = `var(--sky-bg, ${toCss(weatherGradients.default)})`;
+const BOOT_HERO_SCRIM = 'var(--sky-hero)';
+const BOOT_SCROLL_SCRIM = 'var(--sky-scroll)';
 
-// Every place white text meets the sky, as (text tier, glass in the way). The
-// scrim has to satisfy all of them, so it is solved for each and the darkest
-// answer wins. Glass alphas compound where surfaces nest — a nav pill is a 0.10
-// glass inside the 0.10 header once scrolled, and the footer's App Store pill
-// is a 0.10 inside the 0.06 footer — which is exactly the case a single
-// hand-picked number kept missing.
-const P = alphaOf(textTokens.primary);
-const S = alphaOf(textTokens.secondary);
-const M = alphaOf(textTokens.muted);
-
-/**
- * Visible at the top of the page, where the scrim is lightest. The nav bar is
- * transparent until you scroll, so up here its pill is a lone 0.10 surface.
- */
-const HERO_CONSTRAINTS = [
-    { textAlpha: S, glassAlpha: 0 }, // hero subheadline, bare sky
-    { textAlpha: P, glassAlpha: 0.1 }, // nav pill, transparent header
-];
-
-/** Everything below the fold, where the scrim has reached its darkest. */
-const CONTENT_CONSTRAINTS = [
-    { textAlpha: S, glassAlpha: 0 },
-    { textAlpha: P, glassAlpha: 0.19 }, // nav pill inside the now-glass header
-    { textAlpha: M, glassAlpha: 0.1 }, // captions on a glass card
-    { textAlpha: M, glassAlpha: 0.155 }, // the footer's pill inside the footer
-];
-
-/** Element-wise max of two ramps — used while two skies are crossfading. */
-const mergeRamps = (a: ScrimStop[], b: ScrimStop[]): ScrimStop[] =>
-    a.map((s, i) => ({ pos: s.pos, alpha: Math.max(s.alpha, b[i].alpha) }));
-
-const toCssScrim = (ramp: ScrimStop[]) =>
-    `linear-gradient(180deg, ${ramp
-        .map(
-            (s) =>
-                `rgba(0,0,0,${s.alpha.toFixed(3)}) ${(s.pos * 100).toFixed(0)}%`,
-        )
-        .join(', ')})`;
+const idle: (cb: () => void) => void =
+    typeof window !== 'undefined' && 'requestIdleCallback' in window
+        ? (cb) => window.requestIdleCallback(cb)
+        : (cb) => setTimeout(cb, 1);
 
 // Palettes shown after the live sky, ordered so each crossfade is a short hue
 // move: blue → indigo → violet → plum → rose → coral → orange → gold, which
@@ -103,17 +63,21 @@ const SHOWCASE: Palette[] = [
 ];
 
 export default function GradientBackground() {
-    // Index 0 is the live sky; 1..n are SHOWCASE. The live sky can't be known
-    // during SSR (it needs the browser's clock and timezone), so both server
-    // and client start on the app's neutral `default` palette — which is what
-    // globals.css paints too — and the real sky lands on mount.
+    // Index 0 is the live sky; 1..n are SHOWCASE. The exact live sky needs the
+    // browser's clock, so it's computed on mount; until the first crossfade the
+    // layers show the boot script's equivalent through CSS variables (`booted`
+    // false), which also keeps the scrim solver off the hydration path.
+    const [booted, setBooted] = useState(false);
     const [sky, setSky] = useState<Palette>(weatherGradients.default);
     const indexRef = useRef(0);
     const [bottom, setBottom] = useState<Palette>(weatherGradients.default);
     const [top, setTop] = useState<Palette>(SHOWCASE[0]);
     const [topOpacity, setTopOpacity] = useState(0);
     const [isFading, setIsFading] = useState(false);
-    const [scrollT, setScrollT] = useState(0);
+    // Scroll progress drives one layer's opacity directly through this ref —
+    // never React state — so scrolling re-renders nothing and the scrim fade
+    // is a compositor-only opacity change instead of a gradient repaint.
+    const scrollLayerRef = useRef<HTMLDivElement>(null);
     // Whether the sky currently on screen (or being faded to) is the visitor's
     // own, and dark enough for stars. Set at the START of a crossfade so the
     // star layer fades on the same curve as the gradient beneath it.
@@ -132,11 +96,17 @@ export default function GradientBackground() {
     // ── Scroll progress ──────────────────────────────────────────────────────
     useEffect(() => {
         let frame = 0;
+        let last = -1;
         const handler = () => {
             if (frame) return;
             frame = requestAnimationFrame(() => {
                 frame = 0;
-                setScrollT(Math.min(1, window.scrollY / SCROLL_RANGE));
+                const t = Math.min(1, window.scrollY / SCROLL_RANGE);
+                if (t === last) return; // past the range: nothing to do
+                last = t;
+                if (scrollLayerRef.current) {
+                    scrollLayerRef.current.style.opacity = String(t);
+                }
             });
         };
         handler();
@@ -148,36 +118,18 @@ export default function GradientBackground() {
     }, []);
 
     // ── Scrim, solved for whatever sky is on screen ──────────────────────────
-    // Two ramps — one for the top of the page, one for scrolled content — each
-    // varying along the sky's own axis. During a crossfade both palettes are
-    // visible, so the scrim has to satisfy both.
-    const { heroRamp, contentRamp } = useMemo(() => {
-        const build = (stops: readonly string[]) => {
-            const hero = scrimRampFor(stops, HERO_CONSTRAINTS, SCRIM_FLOOR);
-            const content = hero.map((h, i) => ({
-                pos: h.pos,
-                alpha: Math.max(
-                    h.alpha,
-                    scrimRampFor(stops, CONTENT_CONSTRAINTS, h.alpha)[i].alpha,
-                ),
-            }));
-            return { hero, content };
-        };
-        const b = build(bottom);
-        if (!isFading) return { heroRamp: b.hero, contentRamp: b.content };
-        const t = build(top);
-        return {
-            heroRamp: mergeRamps(b.hero, t.hero),
-            contentRamp: mergeRamps(b.content, t.content),
-        };
-    }, [isFading, bottom, top]);
-
-    const scrim = toCssScrim(
-        heroRamp.map((h, i) => ({
-            pos: h.pos,
-            alpha: h.alpha + (contentRamp[i].alpha - h.alpha) * scrollT,
-        })),
-    );
+    // During a crossfade both palettes are visible, so the scrim has to satisfy
+    // both. Solves are cached per palette and pre-warmed in idle time below, so
+    // this is a lookup by the time a fade starts.
+    const { heroScrim, scrollScrim } = useMemo(() => {
+        if (!booted) return { heroScrim: BOOT_HERO_SCRIM, scrollScrim: BOOT_SCROLL_SCRIM };
+        const b = scrimFor(bottom);
+        const t = isFading ? scrimFor(top) : null;
+        const s = t
+            ? { hero: mergeRamps(b.hero, t.hero), content: mergeRamps(b.content, t.content) }
+            : b;
+        return { heroScrim: toCssScrim(s.hero), scrollScrim: toCssScrim(scrollRamp(s)) };
+    }, [booted, isFading, bottom, top]);
 
     // ── Weather showcase ─────────────────────────────────────────────────────
     useEffect(() => {
@@ -194,10 +146,21 @@ export default function GradientBackground() {
 
         const cycle = () => {
             const hold = indexRef.current === 0 ? REST_MS : HOLD_MS;
+            const nextIdx = (indexRef.current + 1) % total;
+            // Solve the scrims this fade will need while the page is idle.
+            idle(() => {
+                scrimFor(paletteAt(indexRef.current));
+                scrimFor(paletteAt(nextIdx));
+            });
             holdTimer = setTimeout(() => {
                 if (!alive) return;
+                // Don't crossfade a sky nobody can see.
+                if (document.hidden) {
+                    cycle();
+                    return;
+                }
 
-                const nextIdx = (indexRef.current + 1) % total;
+                setBooted(true);
                 setIsFading(true);
                 setTop(paletteAt(nextIdx));
                 // The app only shows stars under a clear night sky, never over
@@ -243,7 +206,7 @@ export default function GradientBackground() {
             {/* Bottom layer */}
             <div
                 className='absolute inset-0'
-                style={{ background: toCss(bottom) }}
+                style={{ background: booted ? toCss(bottom) : BOOT_SKY }}
             />
 
             {/* Top layer — fades in, then swaps instantly */}
@@ -260,17 +223,18 @@ export default function GradientBackground() {
 
             {/* Stars sit above the sky but below the scrim, so they dim with it
                 as you scroll — the same ordering the app uses. */}
-            <StarField visible={starsVisible} />
+            {skyIsNight && <StarField visible={starsVisible} />}
 
-            {/* Contrast scrim — see the note above. Transitions over the same
-                duration as the crossfade so a palette that needs more dimming
-                doesn't step into it. */}
+            {/* Contrast scrim — see the note above: a fixed hero layer plus a
+                scroll layer whose opacity is set from the scroll handler. */}
             <div
                 className='absolute inset-0'
-                style={{
-                    background: scrim,
-                    transition: `background ${isFading ? FADE_MS : 120}ms linear`,
-                }}
+                style={{ background: heroScrim }}
+            />
+            <div
+                ref={scrollLayerRef}
+                className='absolute inset-0'
+                style={{ background: scrollScrim, opacity: 0, willChange: 'opacity' }}
             />
         </div>
     );

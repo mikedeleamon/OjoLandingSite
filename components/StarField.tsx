@@ -110,6 +110,10 @@ export default function StarField({ visible }: { visible: boolean }) {
                     style={{
                         animationDuration: `${LAYERS[i].duration}ms`,
                         animationDelay: `${LAYERS[i].delay}ms`,
+                        // Mounted for the whole visit on a night sky, but only
+                        // on screen part of the showcase cycle — don't animate
+                        // an invisible layer.
+                        animationPlayState: visible ? 'running' : 'paused',
                     }}
                 >
                     {stars.map((s) => {

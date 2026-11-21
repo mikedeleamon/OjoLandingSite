@@ -78,11 +78,18 @@ const config: Config = {
         // Duration and delay are set per layer by StarField; the app's twinkle
         // floor is 0.15 (ClearNightIcon's TWINKLE_RANGE).
         twinkle: "twinkle 3s ease-in-out infinite",
+        // Hero entrance. Delay is set inline; fill-mode `both` holds the
+        // hidden start state through the delay.
+        rise: "rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both",
       },
       keyframes: {
         float: {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-12px)" },
+        },
+        rise: {
+          from: { opacity: "0", transform: "translateY(24px)" },
+          to: { opacity: "1", transform: "none" },
         },
         twinkle: {
           "0%, 100%": { opacity: "1" },

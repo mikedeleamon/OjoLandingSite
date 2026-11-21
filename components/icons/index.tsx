@@ -72,14 +72,6 @@ export const CameraIcon = icon(() => (
     </>
 ));
 
-/** app: icons/GlyphIcons — PlaneIcon */
-export const PlaneIcon = icon(() => (
-    <>
-        <path d='M22 2 11 13' />
-        <path d='M22 2 15 22l-4-9-9-4z' />
-    </>
-));
-
 /** app: icons/LocationsIcon — the saved-cities pin. */
 export const PinIcon = icon(() => (
     <>
@@ -96,33 +88,11 @@ export const SearchIcon = icon(() => (
     </>
 ), { strokeWidth: 1.5 });
 
-/** app: icons/ClosetIcons — GridIcon */
-export const GridIcon = icon(() => (
-    <>
-        <rect x={4} y={4} width={7} height={7} rx={1.5} />
-        <rect x={13} y={4} width={7} height={7} rx={1.5} />
-        <rect x={13} y={13} width={7} height={7} rx={1.5} />
-        <rect x={4} y={13} width={7} height={7} rx={1.5} />
-    </>
-), { strokeWidth: 1.5 });
-
 /** app: icons/ClosetIcons — ChevronRightIcon */
 export const ChevronRightIcon = icon(() => <path d='M9 6l6 6-6 6' />, { strokeWidth: 1.5 });
 
-/** app: icons/ClosetIcons — CheckIcon */
-export const CheckIcon = icon(() => <path d='M20 6L9 17l-5-5' />, { strokeWidth: 1.8 });
-
 /** app: icons/ClosetIcons — CloseIcon */
 export const CloseIcon = icon(() => <path d='M18 6L6 18M6 6l12 12' />);
-
-/** app: icons/ClosetIcons — MoreIcon */
-export const MoreIcon = icon((c) => (
-    <>
-        <circle cx={5} cy={12} r={1.4} fill={c} stroke='none' />
-        <circle cx={12} cy={12} r={1.4} fill={c} stroke='none' />
-        <circle cx={19} cy={12} r={1.4} fill={c} stroke='none' />
-    </>
-), { strokeWidth: 1.5 });
 
 // ─── MATCHED — drawn to the same spec ────────────────────────────────────────
 
@@ -197,6 +167,22 @@ export const CalendarCheckIcon = icon(() => (
         <rect x={3.5} y={5} width={17} height={16} rx={2.4} />
         <path d='M8 3v4M16 3v4M3.5 10h17' />
         <path d='M9 15.5l2 2 4-4' />
+    </>
+));
+
+/** Microphone — Siri and Shortcuts. */
+export const MicIcon = icon(() => (
+    <>
+        <rect x={9} y={3} width={6} height={11} rx={3} />
+        <path d='M5 11a7 7 0 0 0 14 0M12 18v3' />
+    </>
+));
+
+/** Two opposing arrows — swapping a piece for a stand-in. */
+export const SwapIcon = icon(() => (
+    <>
+        <path d='M4 8h14M14 4l4 4-4 4' />
+        <path d='M20 16H6M10 12l-4 4 4 4' />
     </>
 ));
 

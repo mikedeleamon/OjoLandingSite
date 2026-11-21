@@ -8,11 +8,6 @@
   "theme_color": "#0F172A",
   "icons": [
     {
-      "src": "/ojo_app_icon@1x.png",
-      "sizes": "1024x1024",
-      "type": "image/png"
-    },
-    {
       "src": "/ojo_app_icon@512.png",
       "sizes": "512x512",
       "type": "image/png"

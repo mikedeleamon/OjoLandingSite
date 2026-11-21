@@ -111,11 +111,13 @@ export interface ScrimStop {
 export function scrimRampFor(
     stops: readonly string[],
     constraints: ScrimOptions[],
-    floor: number,
+    /** One floor for the whole ramp, or one per sample. */
+    floors: number | readonly number[],
     samples = SAMPLES,
 ): ScrimStop[] {
     return Array.from({ length: samples }, (_, i) => {
         const pos = i / (samples - 1);
+        const floor = typeof floors === 'number' ? floors : floors[i];
         const hex = rgbToHexLocal(skyColorAt(stops, pos));
         return {
             pos,

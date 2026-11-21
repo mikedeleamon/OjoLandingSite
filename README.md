@@ -1,6 +1,6 @@
 # OJO Website
 
-Marketing and legal website for the OJO mobile app. Built with Next.js 14, TypeScript, Tailwind CSS, and Framer Motion.
+Marketing and legal website for the OJO mobile app. Built with Next.js 14, TypeScript, and Tailwind CSS.
 
 ## Pages
 
@@ -40,22 +40,21 @@ Place your OJO app assets in the `/public` folder. The following filenames are r
 
 | File | Size | Used for |
 |---|---|---|
-| `public/ojo_app_icon@1x.png` | 192×192 | App icon (hero, footer, favicon, Apple touch icon) |
-| `public/ojoLogo.png` | variable | Navigation header logo |
-| `public/framedimage.png` | variable | App preview on hero section |
-| `public/Ojo_word_logo_Black.png` | variable | OJO word mark (black) |
-| `public/Ojo_word_logo_White.png` | variable | OJO word mark (white) |
-| `public/ojo_word_logo_2.png` | variable | Alternative word mark |
-| `public/og-image.png` | 1200×630 | Social share preview (required for OpenGraph) |
+| `public/ojo_app_icon@512.png` | 512×512 | App icon (hero, PWA manifest) |
+| `public/favicon-32.png` | 32×32 | Favicon |
+| `public/apple-touch-icon.png` | 180×180 | Apple touch icon |
+| `public/framedimage.png` | 960×1920 | App preview on hero section |
+| `public/Ojo_word_logo_White.png` | 1280×1280 | OJO word mark (nav and footer) |
+| `public/og-image.png` | 1200×630 | Social share preview (**not in the repo yet** — referenced by `app/layout.tsx`, so link previews are broken until it's added) |
 | `public/site.webmanifest` | — | PWA manifest |
 
 ### Asset Implementation
 
-- **Hero Icon**: `app/page.tsx` displays `ojo_app_icon@1x.png` (96×96) with the `animate-float` class for smooth floating effect
-- **Nav Logo**: `components/Nav.tsx` uses `ojoLogo.png` (40×40)
+- **Hero Icon**: `app/page.tsx` displays `ojo_app_icon@512.png` (96×96) with the `animate-float` class
+- **Nav / Footer Logo**: `components/Nav.tsx` and `components/Footer.tsx` use `Ojo_word_logo_White.png`
 - **App Preview**: `app/page.tsx` displays `framedimage.png` with decorative glow effect
-- **Footer Icon**: `components/Footer.tsx` uses `ojo_app_icon@1x.png` (28×28)
-- **Favicon & Apple Touch**: `app/layout.tsx` uses `ojo_app_icon@1x.png` for both browser and iOS icons
+- **Favicon & Apple Touch**: `app/layout.tsx` uses `favicon-32.png` and `apple-touch-icon.png` (resized from the 512 icon — keep them small, browsers fetch them on every first visit)
+- **Live sky before first paint**: `lib/skyBoot.ts` inlines a small `<head>` script that sets the sky and scrim as CSS variables, so the background doesn't wait for JS
 
 ## Legal Customization
 
@@ -78,7 +77,7 @@ This is a standard Next.js App Router project. Deploy to:
 - **Nav**: Fixed header with logo and navigation links
 - **Footer**: Footer with branding and legal links
 - **PageHeader**: Reusable page title section for legal pages
-- **AnimatedSection**: Wrapper for scroll-triggered animations
+- **Reveal**: Scroll-in wrapper (IntersectionObserver, no animation library)
 
 ## Directory Structure
 
@@ -90,24 +89,24 @@ app/
 ├── privacy/           # Privacy Policy page
 ├── terms/             # Terms of Service page
 ├── delete-account/    # Account deletion instructions
-└── support/           # FAQ accordion & contact
+└── support/           # FAQ (native <details>) & contact
 
 components/
 ├── GradientBackground.tsx  # Animated background
 ├── Nav.tsx                 # Navigation header
 ├── Footer.tsx              # Footer
 ├── PageHeader.tsx          # Page title section
-└── AnimatedSection.tsx     # Scroll animations
+├── Reveal.tsx              # Scroll-in wrapper
+├── StarField.tsx           # Night-sky stars
+└── icons/                  # Icon set
 
 lib/
 └── constants.ts       # Config values (emails, URLs, dates)
 
 public/
-├── ojo_app_icon@1x.png     # App icon (favicon, Apple touch, hero, footer)
-├── ojoLogo.png             # Nav logo
+├── ojo_app_icon@512.png    # App icon (favicon, Apple touch, hero)
 ├── framedimage.png         # App preview mockup
-├── Word logos              # Various word mark variants
-├── og-image.png            # Social share preview
+├── Ojo_word_logo_White.png # Nav/footer word mark
 └── site.webmanifest        # PWA manifest
 ```
 
